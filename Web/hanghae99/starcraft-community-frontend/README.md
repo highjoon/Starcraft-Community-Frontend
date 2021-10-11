@@ -1,1 +1,1 @@
-Starcraft Community - FrontEnd
+starcraft-community-frontend
