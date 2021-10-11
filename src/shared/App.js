@@ -1,4 +1,5 @@
 import React from "react";
+import GlobalStyle from "../elements/GlobalStyle";
 
 function App() {
     return (
