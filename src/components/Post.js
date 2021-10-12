@@ -1,77 +1,9 @@
 import React from "react";
-<<<<<<< HEAD
-import Image from "../elements/Image";
-import Text from "../elements/Text"
-
-const Post = (props)=> {
-
-    console.log(props)
-    return(
-        <React.Fragment>
-            <Text> dsada</Text>
-            <Image src={props.src}/>
-        </React.Fragment>
-    )
-}
-
-Post.defaultProps = {
-    category: "테란",
-    title: "테란 꿀팁!",
-    image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwSOaq8AXmVYKpL3jLAzV80WpZEIGB4Kz8MuCgcwKIweHv-aQZbHHEqKhcdW5YKTE5j88&usqp=CAU",
-    insert_dt: "2021-10-11 10:00:00"
-}
-export default Post;
-=======
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const Post = (props) => {
-    const postList = [
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-    ];
+    const postList = useSelector((state) => state.post.postList);
 
     return (
         <React.Fragment>
@@ -129,4 +61,3 @@ const PostImg = styled.img`
 `;
 
 export default Post;
->>>>>>> 18aa8d55eae321ea5546632856210cbc9bfadb10

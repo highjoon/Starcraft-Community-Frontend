@@ -1,30 +1,22 @@
 import './App.css';
 import React from "react";
-<<<<<<< HEAD
-import {BrowserRouter, Route} from "react-router-dom";
-import PostList from '../pages/PostList';
-
-
-function App() {
-  return (
-    <React.Fragment>
-      <BrowserRouter>
-        <Route path="/" exact component={PostList}/>
-      </BrowserRouter>
-    </React.Fragment>
-  ) 
-=======
 import GlobalStyle from "../elements/GlobalStyle";
+import { Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "../redux/configureStore";
+
 import Main from "../pages/Main";
+import GlobalStyle from "../elements/GlobalStyle";
 
 function App() {
     return (
         <React.Fragment>
             <GlobalStyle />
-            <Main />
+            <ConnectedRouter history={history}>
+                <Route path="/" excat component={Main} />
+            </ConnectedRouter>
         </React.Fragment>
     );
->>>>>>> 18aa8d55eae321ea5546632856210cbc9bfadb10
 }
 
 export default App;
