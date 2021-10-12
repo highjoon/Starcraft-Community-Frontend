@@ -9,6 +9,10 @@ const Post = (props) => {
     const dispatch = useDispatch();
     const postList = useSelector((state) => state.post.postList);
     let category = null;
+    let is_all = true;
+
+    const { categorize } = props;
+    categorize === "전체보기" ? (is_all = true) : (is_all = false);
 
     useEffect(() => {
         dispatch(postActions.getPostDB());
@@ -38,11 +42,16 @@ const Post = (props) => {
                     .sort((a, b) => a.id - b.id)
                     .map((post, idx) => {
                         chooseCategory(post.categori);
+                        if (!is_all && categorize !== category) return;
                         return (
                             <PostContainer key={idx}>
-                                <PostHeader>{category}</PostHeader>
-                                <PostTitle>{post.title}</PostTitle>
-                                <PostImg src={post.filePath} />
+                                <Text margin="0" center bold>
+                                    {category}
+                                </Text>
+                                <Text margin="10px" center bold>
+                                    {post.title}
+                                </Text>
+                                <PostImage width="100%" src={post.filePath} />
                             </PostContainer>
                         );
                     })}
@@ -67,26 +76,14 @@ const PostContainer = styled.div`
     border-radius: 7px;
     margin-top: 15px;
     margin-bottom: 15px;
+    & :nth-child(1) {
+        border-bottom: 1px solid black;
+    }
 `;
 
-const PostHeader = styled.div`
+const PostImage = styled.img`
     width: 100%;
-    text-align: center;
-    font-size: 25px;
-    border-bottom: 1px solid black;
-`;
-
-const PostTitle = styled.div`
-    width: 100%;
-    height: 35px;
-    text-align: center;
-    font-size: 25px;
-    margin: 10px 0 10px 0;
-`;
-
-const PostImg = styled.img`
-    width: 100%;
-    height: 220px;
+    height: 60%;
 `;
 
 export default Post;
