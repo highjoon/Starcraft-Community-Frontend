@@ -3,14 +3,11 @@ import styled from "styled-components";
 
 const Text = (props) => {
     const { bold, color, size, children, margin } = props;
-    
-    const styles = { bold: bold, color: color, size: size, margin };
-    
-    return (
-    <P {...styles}>{children}</P>
-    )
-};
 
+    const styles = { bold: bold, color: color, size: size, margin };
+
+    return <P {...styles}>{children}</P>;
+};
 
 Text.defaultProps = {
     children: null,
@@ -26,6 +23,5 @@ const P = styled.p`
     font-weight: ${(props) => (props.bold ? "600" : "400")};
     ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
 `;
-
 
 export default Text;
