@@ -11,7 +11,7 @@ const PostWrite = (props) => {
     const dispatch = useDispatch();
     const title = useRef();
     const content = useRef();
-    const [imageDir, setImageDir] = useState("");
+    let [imageDir, setImageDir] = useState("");
     const [species, setSpecies] = useState("");
 
     const getSpecies = (species) => {
@@ -24,12 +24,31 @@ const PostWrite = (props) => {
     const createNewContens = () => {
         const newTitle = title.current.value;
         const newContent = content.current.value;
+
+        if (!species) {
+            window.alert("종족을 선택해주세요!");
+            return;
+        }
+        if (!newTitle) {
+            window.alert("제목을 입력해주세요!");
+            return;
+        }
+        if (!newContent) {
+            window.alert("내용을 입력해주세요!");
+            return;
+        }
+
+        if (!imageDir) {
+            imageDir = "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg";
+        }
+
         const newObj = {
             title: newTitle,
             content: newContent,
             categori: species,
             filePath: imageDir,
         };
+
         dispatch(postActions.addPostDB(newObj));
         window.alert("작성 완료!");
         history.push("/");
