@@ -29,6 +29,7 @@ Button.defaultProps = {
     width: "150px",
     border: false,
     padding: "12px 0px",
+    absolute: false,
 };
 
 const DefaultButton = styled.button`
@@ -42,6 +43,12 @@ const DefaultButton = styled.button`
     box-sizing: border-box;
     border: none;
     ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+
+    &.AddBtn {
+        position: fixed;
+        right: 10%;
+        bottom: 10%;
+    }
 `;
 
 export default Button;
