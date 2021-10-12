@@ -1,22 +1,51 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { Text } from "../elements";
+
+import { actionCreators as postActions } from "../redux/modules/post";
 
 const Post = (props) => {
+    const dispatch = useDispatch();
     const postList = useSelector((state) => state.post.postList);
+    let category = null;
+
+    useEffect(() => {
+        dispatch(postActions.getPostDB());
+    }, []);
+
+    const chooseCategory = (target) => {
+        switch (target) {
+            case 0:
+                category = "저그";
+                break;
+            case 1:
+                category = "테란";
+                break;
+            case 2:
+                category = "프로토스";
+                break;
+            default:
+                category = "";
+        }
+    };
 
     return (
         <React.Fragment>
             <PostWrapper>
-                {postList.map((post, idx) => {
-                    return (
-                        <PostContainer key={idx}>
-                            <PostHeader>{post.header}</PostHeader>
-                            <PostTitle>{post.title}</PostTitle>
-                            <PostImg src={post.src} />
-                        </PostContainer>
-                    );
-                })}
+                {postList
+                    .slice()
+                    .sort((a, b) => a.id - b.id)
+                    .map((post, idx) => {
+                        chooseCategory(post.categori);
+                        return (
+                            <PostContainer key={idx}>
+                                <PostHeader>{category}</PostHeader>
+                                <PostTitle>{post.title}</PostTitle>
+                                <PostImg src={post.filePath} />
+                            </PostContainer>
+                        );
+                    })}
             </PostWrapper>
         </React.Fragment>
     );
