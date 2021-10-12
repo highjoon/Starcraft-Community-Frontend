@@ -11,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
 body {
     margin: 0 auto;
     cursor: default;
-    font-family: 'Gothic A1', sans-serif;
 }
 
 a {
