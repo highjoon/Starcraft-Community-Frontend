@@ -15,8 +15,8 @@ function App() {
             <GlobalStyle />
             <Header />
             <ConnectedRouter history={history}>
-                <Route path="/" excat component={Main} />
-                <Route path="/write" excat component={PostWrite} />
+                <Route path="/" exact component={Main} />
+                <Route path="/write" exact component={PostWrite} />
             </ConnectedRouter>
         </React.Fragment>
     );

@@ -4,11 +4,7 @@ import styled from "styled-components";
 const PostWrite = (props) => {
     return (
         <React.Fragment>
-            <div>ddd</div>
-            <div>ddd</div>
-            <div>ddd</div>
-            <div>ddd</div>
-            <div>ddd</div>
+            <div>postwrite</div>
         </React.Fragment>
     );
 };
