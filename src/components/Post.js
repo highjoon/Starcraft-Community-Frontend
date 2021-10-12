@@ -1,54 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const Post = (props) => {
-    const postList = [
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-        {
-            header: "헤더",
-            title: "타이틀",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
-        },
-    ];
+    const postList = useSelector((state) => state.post.postList);
 
     return (
         <React.Fragment>
