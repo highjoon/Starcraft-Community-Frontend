@@ -1,12 +1,14 @@
 import React from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import { Button } from "../elements";
 
 const Header = (props) => {
+    const history = useHistory();
     return (
         <React.Fragment>
             <Navbar>
-                <Logo>logo</Logo>
+                <Logo onClick={() => history.push("/")}>logo</Logo>
                 <BtnContainer>
                     <Button text="로그인" className="signIn_btn" />
                     <Button text="회원가입" className="signUp_btn" />
@@ -34,6 +36,7 @@ const Logo = styled.div`
     border: 1px solid black;
     text-align: center;
     margin-left: 10%;
+    cursor: pointer;
 `;
 
 const BtnContainer = styled.div`

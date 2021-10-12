@@ -7,7 +7,7 @@ const Species = ({ species, getSpecies }) => {
     const dropdownRef = useRef(null);
 
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-    let [target, setTarget] = useState("종족");
+    const [target, setTarget] = useState("종족");
 
     const onClick = () => setIsActive(!isActive);
     const choose = (e) => {
