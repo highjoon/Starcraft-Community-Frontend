@@ -1,9 +1,23 @@
 {
     "post": [
         {
-            "id": 1,
+            "id": 0,
             "categori": 0,
-            "title": "테스트 제목",
+            "title": "테스트 제목 (저그)",
+            "filePath": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
+            "content": "리덕스 미들웨어를 직접 만들어보면 이해하기 쉽죠. "
+        },
+        {
+            "id": 1,
+            "categori": 1,
+            "title": "테스트 제목 (테란)",
+            "filePath": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
+            "content": "리덕스 미들웨어를 직접 만들어보면 이해하기 쉽죠. "
+        },
+        {
+            "id": 2,
+            "categori": 2,
+            "title": "테스트 제목 (프로토스)",
             "filePath": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
             "content": "리덕스 미들웨어를 직접 만들어보면 이해하기 쉽죠. "
         }
