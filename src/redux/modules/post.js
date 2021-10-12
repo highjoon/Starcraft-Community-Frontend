@@ -11,9 +11,9 @@ const initialState = {
     post: [],
     postList: [
         {
-            header: "저그",
+            categori: "저그",
             title: "제목",
-            src: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
+            filePath: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
         },
     ],
 };
