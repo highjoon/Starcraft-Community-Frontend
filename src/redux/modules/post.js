@@ -2,8 +2,10 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 
 const GET_POST = "GET_POST";
+const ADD_POST = "ADD_POST";
 
 const getPost = createAction(GET_POST, (postList) => ({ postList }));
+const addPost = createAction(ADD_POST, (post) => ({ post }));
 
 const initialState = {
     post: [],
@@ -23,12 +25,18 @@ export default handleActions(
                 console.log(action.payload);
                 draft.postList = action.payload.postList;
             }),
+        [ADD_POST]: (state, action) =>
+            produce(state, (draft) => {
+                console.log(action.payload.post);
+                draft.postList.push(action.payload.post);
+            }),
     },
     initialState
 );
 
 const actionCreators = {
     getPost,
+    addPost,
 };
 
 export { actionCreators };
