@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Input, Text, Button } from "../elements";
 import { actionCreators as postActions } from "../redux/modules/post";
+import Species from "../components/Species";
 
 const PostWrite = (props) => {
     const dispatch = useDispatch();
@@ -10,7 +11,13 @@ const PostWrite = (props) => {
     const content = React.useRef();
     const fileInput = React.useRef();
 
-    const [imageDir, setImageDir] = React.useState("");
+    const { history } = props;
+
+    const [imageDir, setImageDir] = useState("");
+    const [species, setSpecies] = useState("");
+    const getSpecies = (species) => {
+        setSpecies(species);
+    };
 
     const selectFile = (e) => {
         const reader = new FileReader();
@@ -24,19 +31,23 @@ const PostWrite = (props) => {
     const createNewContens = () => {
         const newTitle = title.current.value;
         const newContent = content.current.value;
+
         const newObj = {
             title: newTitle,
             content: newContent,
+            categori: species,
             filePath: imageDir,
         };
-        dispatch(postActions.addPost(newObj));
+        console.log(newObj);
+        dispatch(postActions.addPostDB(newObj));
         window.alert("작성 완료!");
+        history.push("/");
     };
 
     return (
         <React.Fragment>
             <Wrapper>
-                <Species>저그</Species>
+                <Species species={species} getSpecies={getSpecies} />
                 <Text bold>제목</Text>
                 <Input type="text" width="100%" borderRadius="7px" placeholder="제목을 입력해주세요" _ref={title} />
                 <Text bold>내용</Text>
@@ -53,20 +64,6 @@ const Wrapper = styled.div`
     width: 80%;
     margin: 0 auto;
     text-align: center;
-`;
-
-const Species = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    padding: 12px 0px;
-    border: 1px solid black;
-    border-radius: 7px;
-    background-color: #212121;
-    color: #ffffff;
-    margin-top: 10px;
-    margin-bottom: 10px;
 `;
 
 export default PostWrite;
