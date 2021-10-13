@@ -10,14 +10,13 @@ const instance = axios.create({
 });
 
 export const apis = {
-    // 게시물 불러오기
     // getPost: () => instance.get("api/post"),
     getPost: () => instance.get("post"),
-    // 게시물 작성하기
     // createPost: (contents) => instance.post("api/post", contents),
     createPost: (contents) => instance.post("post", contents),
-    // 게시물 수정하기
     // editPost: (id, content) => instance.put(`/posts/${id}`, content),
-    // 게시물 삭제하기
     // delPost: (id) => instance.delete(`/posts/${id}`),
+    getUser: () => instance.get("user"),
+    signUp: (contents) => instance.post("user", contents),
+    logIn: (contents) => instance.post("user", contents),
 };

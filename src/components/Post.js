@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Text } from "../elements";
-
 import { actionCreators as postActions } from "../redux/modules/post";
+import zergImg from "../img/zerg.png";
+import protossImg from "../img/protoss.png";
+import terranImg from "../img/terran.png";
 
 const Post = (props) => {
     const dispatch = useDispatch();
@@ -23,15 +25,15 @@ const Post = (props) => {
         switch (target) {
             case 0:
                 category = "저그";
-                categoryImageDir = "img/zerg.png";
+                categoryImageDir = zergImg;
                 break;
             case 1:
                 category = "테란";
-                categoryImageDir = "img/terran.png";
+                categoryImageDir = protossImg;
                 break;
             case 2:
                 category = "프로토스";
-                categoryImageDir = "img/protoss.png";
+                categoryImageDir = terranImg;
                 break;
             default:
                 category = "";
@@ -40,7 +42,7 @@ const Post = (props) => {
 
     return (
         <React.Fragment>
-            <Whole>
+            <WholeContainer>
                 <PostWrapper>
                     {postList
                         .slice()
@@ -59,12 +61,12 @@ const Post = (props) => {
                             );
                         })}
                 </PostWrapper>
-            </Whole>
+            </WholeContainer>
         </React.Fragment>
     );
 };
 
-const Whole = styled.div`
+const WholeContainer = styled.div`
     width: 80%;
     margin: 0 auto;
 `;
