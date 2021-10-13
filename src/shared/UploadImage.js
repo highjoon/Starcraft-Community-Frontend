@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Upload = (props) => {
+const UploadImage = (props) => {
     const { getImage } = props;
 
     const fileInput = React.useRef();
@@ -21,7 +21,7 @@ const Upload = (props) => {
         <React.Fragment>
             <Preview className="img__box" />
             <Input type="file" id="imgFile" onChange={selectFile} ref={fileInput} />
-            <label for="imgFile">이미지 등록하기</label>
+            <label htmlFor="imgFile">이미지 등록하기</label>
         </React.Fragment>
     );
 };
@@ -74,4 +74,4 @@ const Input = styled.input`
     }
 `;
 
-export default Upload;
+export default UploadImage;

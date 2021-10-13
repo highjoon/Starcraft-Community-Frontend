@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { Input, Text } from "../elements";
+import { Species } from "../components";
+import { Input, Text, Button } from "../elements";
 import { actionCreators as postActions } from "../redux/modules/post";
-import Species from "../components/Species";
-import UploadImage from "../shared/UploadImage";
-import { Button } from "../elements";
+import { UploadImage } from "../shared";
+import basicPostImg from "../img/basicPostImg.jpg";
 
 const PostWrite = (props) => {
     const { history } = props;
@@ -40,7 +40,7 @@ const PostWrite = (props) => {
         }
 
         if (!imageDir) {
-            imageDir = "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg";
+            imageDir = basicPostImg;
         }
 
         const newObj = {

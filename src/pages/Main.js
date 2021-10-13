@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import Category from "../components/Category";
-import Post from "../components/Post";
-import AddBtn from "../components/AddBtn";
+import { Category, Post, AddBtn } from "../components";
 
 const Main = (props) => {
     const { history } = props;

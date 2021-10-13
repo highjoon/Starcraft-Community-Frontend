@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { useDetectOutsideClick } from "../hooks/useDetectOutsideClick";
 import { Text } from "../elements";
+import { useDetectOutsideClick } from "../hooks/useDetectOutsideClick";
 
 const Species = ({ species, getSpecies }) => {
     const dropdownRef = useRef(null);
