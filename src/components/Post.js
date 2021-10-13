@@ -40,34 +40,41 @@ const Post = (props) => {
 
     return (
         <React.Fragment>
-            <PostWrapper>
-                {postList
-                    .slice()
-                    .sort((a, b) => a.id - b.id)
-                    .map((post, idx) => {
-                        chooseCategory(post.categori);
-                        if (!is_all && categorize !== category) return;
-                        return (
-                            <PostContainer key={idx}>
-                                <Image src={categoryImageDir} />
-                                <Text size="18px" margin="5px">
-                                    {post.title}
-                                </Text>
-                                <PostImage width="100%" src={post.filePath} />
-                            </PostContainer>
-                        );
-                    })}
-            </PostWrapper>
+            <Whole>
+                <PostWrapper>
+                    {postList
+                        .slice()
+                        .sort((a, b) => a.id - b.id)
+                        .map((post, idx) => {
+                            chooseCategory(post.categori);
+                            if (!is_all && categorize !== category) return;
+                            return (
+                                <PostContainer key={idx}>
+                                    <Image src={categoryImageDir} />
+                                    <Text size="18px" margin="5px">
+                                        {post.title}
+                                    </Text>
+                                    <PostImage width="100%" src={post.filePath} />
+                                </PostContainer>
+                            );
+                        })}
+                </PostWrapper>
+            </Whole>
         </React.Fragment>
     );
 };
 
+const Whole = styled.div`
+    width: 80%;
+    margin: 0 auto;
+`;
+
 const PostWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
 `;
 
@@ -75,8 +82,7 @@ const PostContainer = styled.div`
     width: 300px;
     height: 400px;
     border-radius: 5px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin: 15px auto;
     background-color: #fff;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
     cursor: pointer;
