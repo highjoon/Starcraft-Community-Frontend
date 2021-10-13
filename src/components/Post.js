@@ -1,22 +1,62 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { Text } from "../elements";
+
+import { actionCreators as postActions } from "../redux/modules/post";
 
 const Post = (props) => {
+    const dispatch = useDispatch();
     const postList = useSelector((state) => state.post.postList);
+    let category = null;
+    let categoryImageDir = null;
+    let is_all = true;
+
+    const { categorize } = props;
+    categorize === "전체보기" ? (is_all = true) : (is_all = false);
+
+    useEffect(() => {
+        dispatch(postActions.getPostDB());
+    }, []);
+
+    const chooseCategory = (target) => {
+        switch (target) {
+            case 0:
+                category = "저그";
+                categoryImageDir = "img/zerg.png";
+                break;
+            case 1:
+                category = "테란";
+                categoryImageDir = "img/terran.png";
+                break;
+            case 2:
+                category = "프로토스";
+                categoryImageDir = "img/protoss.png";
+                break;
+            default:
+                category = "";
+        }
+    };
 
     return (
         <React.Fragment>
             <PostWrapper>
-                {postList.map((post, idx) => {
-                    return (
-                        <PostContainer key={idx}>
-                            <PostHeader>{post.header}</PostHeader>
-                            <PostTitle>{post.title}</PostTitle>
-                            <PostImg src={post.src} />
-                        </PostContainer>
-                    );
-                })}
+                {postList
+                    .slice()
+                    .sort((a, b) => a.id - b.id)
+                    .map((post, idx) => {
+                        chooseCategory(post.categori);
+                        if (!is_all && categorize !== category) return;
+                        return (
+                            <PostContainer key={idx}>
+                                <Image src={categoryImageDir} />
+                                <Text size="18px" margin="5px">
+                                    {post.title}
+                                </Text>
+                                <PostImage width="100%" src={post.filePath} />
+                            </PostContainer>
+                        );
+                    })}
             </PostWrapper>
         </React.Fragment>
     );
@@ -33,31 +73,28 @@ const PostWrapper = styled.div`
 
 const PostContainer = styled.div`
     width: 300px;
-    height: 350px;
-    border: 1px solid black;
-    border-radius: 7px;
+    height: 400px;
+    border-radius: 5px;
     margin-top: 15px;
     margin-bottom: 15px;
+    background-color: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+    &:hover {
+        transform: scale(1.05);
+    }
 `;
 
-const PostHeader = styled.div`
+const PostImage = styled.img`
     width: 100%;
-    text-align: center;
-    font-size: 25px;
-    border-bottom: 1px solid black;
+    height: 60%;
 `;
 
-const PostTitle = styled.div`
-    width: 100%;
-    height: 35px;
-    text-align: center;
-    font-size: 25px;
-    margin: 10px 0 10px 0;
-`;
-
-const PostImg = styled.img`
-    width: 100%;
-    height: 220px;
+const Image = styled.img`
+    width: 50px;
+    height: 50px;
+    margin: 5px;
 `;
 
 export default Post;

@@ -8,15 +8,19 @@ import { history } from "../redux/configureStore";
 import Header from "../components/Header";
 import Main from "../pages/Main";
 import PostWrite from "../pages/PostWrite";
+import Login from "../components/Login";
+import SignUp from "../components/SignUp";
 
 function App() {
     return (
         <React.Fragment>
             <GlobalStyle />
-            <Header />
             <ConnectedRouter history={history}>
+                <Header />
                 <Route path="/" exact component={Main} />
                 <Route path="/write" exact component={PostWrite} />
+                <Route path="/login" exact component={Login} />
+                <Route path="/signup" exact component={SignUp} />
             </ConnectedRouter>
         </React.Fragment>
     );

@@ -29,19 +29,40 @@ Button.defaultProps = {
     width: "150px",
     border: false,
     padding: "12px 0px",
+    absolute: false,
 };
 
 const DefaultButton = styled.button`
     width: ${(props) => props.width};
     height: ${(props) => props.height};
-    background-color: #212121;
-    color: #ffffff;
+    line-height: calc(${(props) => props.height} / 3);
+    ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
     padding: ${(props) => props.padding};
-    border: 1px solid black;
+    background-color: #4a5666;
+    color: #ffffff;
+    border: 1px solid #4a5666;
     border-radius: 7px;
     box-sizing: border-box;
-    border: none;
-    ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+    font-family: "NanumSquareB";
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 200ms ease-in-out;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+
+    &.AddBtn {
+        position: fixed;
+        right: 5%;
+        bottom: 10%;
+    }
+
+    &:hover {
+        font-size: 20px;
+        font-weight: bold;
+        border: 1px solid #ffffff;
+        background-color: #ffffff;
+        color: #4a5666;
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+    }
 `;
 
 export default Button;

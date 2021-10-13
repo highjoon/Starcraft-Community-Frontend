@@ -91,5 +91,4 @@ const Inputs = styled.div`
 const Label = styled.div`
 `;
 
-
 export default SignUp;
