@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import { Button } from "../elements";
+import starcraftImg from "../img/starcraft.png";
 
 const Header = (props) => {
     const history = useHistory();
@@ -9,7 +10,7 @@ const Header = (props) => {
     return (
         <React.Fragment>
             <Navbar>
-                <Logo onClick={() => history.push("/")}>logo</Logo>
+                <Logo src={starcraftImg} onClick={() => history.push("/")} />
                 <BtnContainer>
                     <Button text="로그인" className="signIn_btn" _onClick={() => history.push("/login")} />
                     <Button text="회원가입" className="signUp_btn" _onClick={() => history.push("/signup")} />
@@ -23,19 +24,16 @@ const Navbar = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f2eeea;
-    border-bottom: 1px solid black;
+    background-color: #fff;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 `;
 
-const Logo = styled.div`
-    width: 80px;
+const Logo = styled.img`
+    width: 150px;
     height: 80px;
     line-height: 80px;
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color: white;
-    border: 1px solid black;
-    text-align: center;
     margin-left: 10%;
     cursor: pointer;
 `;

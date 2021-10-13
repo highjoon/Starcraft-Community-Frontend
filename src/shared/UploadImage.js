@@ -18,7 +18,9 @@ const Upload = (props) => {
     return (
         <React.Fragment>
             <input type="file" onChange={selectFile} ref={fileInput} />
-            <Button _onClick={_onClick}>작성하기</Button>
+            <Button height="40px" _onClick={_onClick}>
+                작성하기
+            </Button>
         </React.Fragment>
     );
 };

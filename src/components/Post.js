@@ -9,6 +9,7 @@ const Post = (props) => {
     const dispatch = useDispatch();
     const postList = useSelector((state) => state.post.postList);
     let category = null;
+    let categoryImageDir = null;
     let is_all = true;
 
     const { categorize } = props;
@@ -22,12 +23,15 @@ const Post = (props) => {
         switch (target) {
             case 0:
                 category = "저그";
+                categoryImageDir = "img/zerg.png";
                 break;
             case 1:
                 category = "테란";
+                categoryImageDir = "img/terran.png";
                 break;
             case 2:
                 category = "프로토스";
+                categoryImageDir = "img/protoss.png";
                 break;
             default:
                 category = "";
@@ -45,10 +49,8 @@ const Post = (props) => {
                         if (!is_all && categorize !== category) return;
                         return (
                             <PostContainer key={idx}>
-                                <Text margin="0" center bold>
-                                    {category}
-                                </Text>
-                                <Text margin="10px" center bold>
+                                <Image src={categoryImageDir} />
+                                <Text size="18px" margin="5px">
                                     {post.title}
                                 </Text>
                                 <PostImage width="100%" src={post.filePath} />
@@ -71,19 +73,28 @@ const PostWrapper = styled.div`
 
 const PostContainer = styled.div`
     width: 300px;
-    height: 350px;
-    border: 1px solid black;
-    border-radius: 7px;
+    height: 400px;
+    border-radius: 5px;
     margin-top: 15px;
     margin-bottom: 15px;
-    & :nth-child(1) {
-        border-bottom: 1px solid black;
+    background-color: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+    &:hover {
+        transform: scale(1.05);
     }
 `;
 
 const PostImage = styled.img`
     width: 100%;
     height: 60%;
+`;
+
+const Image = styled.img`
+    width: 50px;
+    height: 50px;
+    margin: 5px;
 `;
 
 export default Post;

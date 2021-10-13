@@ -72,7 +72,7 @@ const MenuContainer = styled.div`
 `;
 
 const TriggerBtn = styled.button`
-    background-color: #212121;
+    background-color: #4a5666;
     color: #ffffff;
     border-radius: 90px;
     cursor: pointer;
