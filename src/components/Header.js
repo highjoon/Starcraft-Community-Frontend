@@ -5,13 +5,14 @@ import { Button } from "../elements";
 
 const Header = (props) => {
     const history = useHistory();
+    console.log(props);
     return (
         <React.Fragment>
             <Navbar>
                 <Logo onClick={() => history.push("/")}>logo</Logo>
                 <BtnContainer>
-                    <Button text="로그인" className="signIn_btn" />
-                    <Button text="회원가입" className="signUp_btn" />
+                    <Button text="로그인" className="signIn_btn" _onClick={() => history.push("/login")} />
+                    <Button text="회원가입" className="signUp_btn" _onClick={() => history.push("/signup")} />
                 </BtnContainer>
             </Navbar>
         </React.Fragment>
