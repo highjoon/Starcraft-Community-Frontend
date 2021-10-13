@@ -1,28 +1,77 @@
 import React from "react";
-import { Button } from "../elements";
+import styled from "styled-components";
 
 const Upload = (props) => {
-    const { getImage, _onClick } = props;
+    const { getImage } = props;
 
     const fileInput = React.useRef();
 
     const selectFile = (e) => {
         const reader = new FileReader();
         const file = fileInput.current.files[0];
+        const imgBox = document.querySelector(".img__box");
         reader.readAsDataURL(file);
         reader.onloadend = () => {
+            imgBox.style.backgroundImage = `url(${reader.result})`;
             getImage(reader.result);
         };
     };
 
     return (
         <React.Fragment>
-            <input type="file" onChange={selectFile} ref={fileInput} />
-            <Button height="40px" _onClick={_onClick}>
-                작성하기
-            </Button>
+            <Preview className="img__box" />
+            <Input type="file" id="imgFile" onChange={selectFile} ref={fileInput} />
+            <label for="imgFile">이미지 등록하기</label>
         </React.Fragment>
     );
 };
+
+const Preview = styled.div`
+    width: 100%;
+    height: 400px;
+    background-color: #e3ddd5;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 7px;
+`;
+
+const Input = styled.input`
+    width: 100%;
+    height: 50px;
+    text-align: center;
+
+    & {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    & + label {
+        display: block;
+        width: 80%;
+        height: 50px;
+        line-height: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #4a5666;
+        border-radius: 7px;
+        margin: 10px auto 0 auto;
+        cursor: pointer;
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+        transition: all 200ms ease-in-out;
+    }
+
+    & + label:hover {
+        color: #4a5666;
+        background-color: #fff;
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+        transition: all 200ms ease-in-out;
+    }
+`;
 
 export default Upload;

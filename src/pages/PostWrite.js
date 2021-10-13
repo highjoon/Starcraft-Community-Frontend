@@ -5,6 +5,7 @@ import { Input, Text } from "../elements";
 import { actionCreators as postActions } from "../redux/modules/post";
 import Species from "../components/Species";
 import UploadImage from "../shared/UploadImage";
+import { Button } from "../elements";
 
 const PostWrite = (props) => {
     const { history } = props;
@@ -64,6 +65,9 @@ const PostWrite = (props) => {
                 <Input multiLine type="text" borderRadius="7px" placeholder="내용을 입력해주세요" _ref={content} />
                 <Text bold>이미지</Text>
                 <UploadImage getImage={getImageDir} _onClick={createNewContens} />
+                <Button margin="30px" height="40px" _onClick={createNewContens}>
+                    작성하기
+                </Button>
             </Wrapper>
         </React.Fragment>
     );
