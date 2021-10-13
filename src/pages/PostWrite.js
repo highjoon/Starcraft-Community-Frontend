@@ -25,7 +25,7 @@ const PostWrite = (props) => {
         const newTitle = title.current.value;
         const newContent = content.current.value;
 
-        if (!species) {
+        if (!species && species !== 0) {
             window.alert("종족을 선택해주세요!");
             return;
         }
