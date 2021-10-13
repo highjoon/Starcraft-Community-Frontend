@@ -1,94 +1,70 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Text, Input } from "../elements";
+import UploadImage from "../shared/UploadImage";
+import { Button } from "../elements";
 
 function SignUp() {
-  const [id, setId] = useState("");
-  const [userNick, setUserNick] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordconfirm, setPasswordconfirm] = useState("");
+    const [id, setId] = useState("");
+    const [userNick, setUserNick] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordconfirm, setPasswordconfirm] = useState("");
 
-  return (
-    <Create_membership>
-      <Title>회원가입</Title>
-      <Inputs>
-      <Label type="text" for="id">
-        아이디
-      </Label>
-      <input
-        name="id"
-        type="id"
-        placeholder="id"
-        required
-        value={id}
-        id="id"
-      ></input>
-      <Label type="text" for="userNick">
-        닉네임
-      </Label>
-      <input
-        name="userNick"
-        type="userNick"
-        placeholder="userNick"
-        required
-        value={userNick}
-        id="userNick"
-      ></input>
-      <Label type="text" for="password">
-        비밀번호
-      </Label>
-      <input
-        name="password"
-        type="password"
-        placeholder="password"
-        required
-        value={password}
-        id="password"
-      ></input>
-      <Label type="text" for="passwordconfirm">
-        비밀번호 확인
-      </Label>
-      <input
-        name="passwordconfirm"
-        type="passwordconfirm"
-        placeholder="passwordconfirm"
-        required
-        value={passwordconfirm}
-        id="passwordconfirm"
-      ></input>
-      </Inputs>
-      <input type="submit" value="사진 업로드" />
-      <input type="submit" value="작성완료" />
-    </Create_membership>
-  );
+    let [imageDir, setImageDir] = useState("");
+
+    const getImageDir = (imageDir) => {
+        setImageDir(imageDir);
+    };
+
+    return (
+        <Wrapper>
+            <ImgBox>
+                <Text bold>이미지</Text>
+                <UploadImage getImage={getImageDir} />
+            </ImgBox>
+            <InputBox>
+                <Text bold>이메일</Text>
+                <Input type="text" width="100%" borderRadius="7px" placeholder="이메일을 입력해주세요" />
+                <Text bold>닉네임</Text>
+                <Input type="text" width="100%" borderRadius="7px" placeholder="닉네임을 입력해주세요" />
+                <Text bold>비밀번호</Text>
+                <Input type="text" width="100%" borderRadius="7px" placeholder="비밀번호를 입력해주세요" />
+                <Text bold>비밀번호 확인</Text>
+                <Input type="text" width="100%" borderRadius="7px" placeholder="비밀번호를 확인해주세요" />
+                <Button margin="10px auto 0 auto" width="100%" className="submitBtn">
+                    회원가입
+                </Button>
+            </InputBox>
+        </Wrapper>
+    );
 }
 
-const Create_membership = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  margin: 30px auto;
-  background-color:#F3F3F3;
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 10px auto;
+
+    & .submitBtn {
+        display: block;
+    }
 `;
 
-const Title = styled.div`
-  font-size: 30px;
-  width:100%;
-  text-align:center;
-  margin: 40px;
+const ImgBox = styled.div`
+    flex-basis: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
 `;
 
-const Inputs = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction:column;
-  justify-content: center;
-  align-items: center;
-  background-color:red;
-`;
-
-const Label = styled.div`
+const InputBox = styled.div`
+    flex-basis: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 50px;
+    text-align: center;
 `;
 
 export default SignUp;
