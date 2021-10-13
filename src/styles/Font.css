@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "NanumSquare_acEB";
+    src: url("./fonts/NanumSquare_acEB.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "NanumSquareB";
+    src: url("./fonts/NanumSquareB.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "NanumSquareL";
+    src: url("./fonts/NanumSquareL.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "NanumSquare_acB";
+    src: url("./fonts/NanumSquare_acB.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Helvetica";
+    src: url("./fonts/Helvetica95-Black.woff") format("woff"), url("../fonts/Helvetica\ Black.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Helvetica B";
+    src: url("./fonts/Helvetica75-Bold.woff") format("woff"), url("../fonts/Helvetica\ Bold.ttf") format("truetype");
+}

@@ -70,7 +70,7 @@ const PostWrite = (props) => {
 };
 
 const Wrapper = styled.div`
-    width: 80%;
+    width: 600px;
     margin: 0 auto;
     text-align: center;
 `;

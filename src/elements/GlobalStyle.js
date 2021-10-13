@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 body {
     margin: 0 auto;
     cursor: default;
+    background-color: #F0F2F5;
 }
 
 a {

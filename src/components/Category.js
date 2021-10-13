@@ -14,7 +14,7 @@ const Category = (props) => {
         <React.Fragment>
             <BtnContainer>
                 {categoryList.map((category, idx) => {
-                    return <Button key={idx} text={category} width="20%" height="50px" _onClick={getSpecies} />;
+                    return <Button key={idx} text={category} width="20%" height="40px" _onClick={getSpecies} />;
                 })}
             </BtnContainer>
         </React.Fragment>
