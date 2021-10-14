@@ -1,22 +1,16 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
-import { setCookie, deleteCookie } from "../../shared";
-import axios from "axios";
+import { deleteCookie } from "../../shared";
 
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
 const LOAD_USER = "LOAD_USER";
 const LOGIN_CHECK = "LOGIN_CHECK";
-// const SET_USER = "SET_USER";
-// const ADD_USER = "ADD_USER";
 
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
-// const loadUser = createAction(LOAD_USER, (user) => ({ user }));
 const loginCheck = createAction(LOGIN_CHECK, (cookie) => ({ cookie }));
-// const setUser = createAction(SET_USER, (email) => ({ email }));
-// const addUser = createAction(ADD_USER, (userObj) => ({ userObj }));
 
 const initialState = {
     user: {
@@ -27,50 +21,32 @@ const initialState = {
     is_login: false,
 };
 
-// const getUserDB = () => {
-//     return (dispatch) => {
-//         apis.getUser()
-//             .then((res) => {
-//                 const userData = res.data;
-//                 dispatch(loadUser(userData));
-//             })
-//             .catch((err) => {
-//                 console.log(err);
-//             });
-//     };
-// };
-
-// const loginAction = (user) => {
-//     return (dispatch, getState, { history }) => {
-//         dispatch(logIn(user));
-//         history.push("/");
-//     };
-// };
-
 const logInDB = (email, pwd) => {
     return (dispatch, getState, { history }) => {
-        const formData = new FormData();
-        formData.append("username", email);
-        formData.append("password", pwd);
-        apis.logIn(formData)
+        let loginPostData = new FormData();
+        loginPostData.append("username", email);
+        loginPostData.append("password", pwd);
+        console.log(loginPostData);
+        apis.logIn(loginPostData)
             .then((res) => {
                 console.log(res);
-                if (res.data.token != null) {
-                    console.log(res.data);
-                    const jwtToken = res.data.token;
-                    setCookie("user_login", jwtToken);
-                    axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
-                    dispatch(
-                        logIn({
-                            email: email,
-                            password: pwd,
-                        })
-                    );
-                    window.alert(`로그인 성공! 이메일 : ${email}, 비밀번호 : ${pwd} (테스트용 임시 알림)`);
-                    history.push("/");
-                } else {
-                    window.alert("ID 또는 비밀번호를 다시 확인해주세요.");
-                }
+                window.alert(`로그인 성공! 이메일 : ${email}, 비밀번호 : ${pwd} (테스트용 임시 알림)`);
+                history.push("/");
+                // if (res.data.token != null) {
+                //     console.log(res.data);
+                //     const jwtToken = res.data.token;
+                //     setCookie("user_login", jwtToken);
+                //     axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
+                //     dispatch(
+                //         logIn({
+                //             email: email,
+                //             password: pwd,
+                //         })
+                //     );
+
+                // } else {
+                //     window.alert("ID 또는 비밀번호를 다시 확인해주세요.");
+                // }
             })
             .catch((err) => {
                 console.log(err);
@@ -114,18 +90,6 @@ export default handleActions(
             produce(state, (draft) => {
                 draft.user = action.payload.user;
             }),
-        [LOGIN_CHECK]: (state, action) =>
-            produce(state, (draft) => {
-                draft.is_login = action.payload.cookie;
-            }),
-        // [SET_USER]: (state, action) =>
-        //     produce(state, (draft) => {
-        //         draft.email = action.paylaod.email;
-        //     }),
-        // [ADD_USER]: (state, action) =>
-        //     produce(state, (draft) => {
-        //         draft.user.push(action.payload.userObj);
-        //     }),
     },
     initialState
 );
@@ -134,7 +98,6 @@ const actionCreators = {
     logIn,
     loginCheck,
     logOut,
-    // getUserDB,
     signUpDB,
     logInDB,
 };
