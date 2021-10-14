@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { Input, Text } from "../elements";
+import { Species } from "../components";
+import { Input, Text, Button } from "../elements";
 import { actionCreators as postActions } from "../redux/modules/post";
-import Species from "../components/Species";
-import UploadImage from "../shared/UploadImage";
+import { UploadImage } from "../shared";
 
 const PostWrite = (props) => {
     const { history } = props;
@@ -14,12 +14,8 @@ const PostWrite = (props) => {
     let [imageDir, setImageDir] = useState("");
     const [species, setSpecies] = useState("");
 
-    const getSpecies = (species) => {
-        setSpecies(species);
-    };
-    const getImageDir = (imageDir) => {
-        setImageDir(imageDir);
-    };
+    const getSpecies = (species) => setSpecies(species);
+    const getImageDir = (imageDir) => setImageDir(imageDir);
 
     const createNewContens = () => {
         const newTitle = title.current.value;
@@ -37,19 +33,20 @@ const PostWrite = (props) => {
             window.alert("내용을 입력해주세요!");
             return;
         }
-
         if (!imageDir) {
-            imageDir = "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg";
+            imageDir = "basic.jpg";
         }
 
-        const newObj = {
-            title: newTitle,
-            content: newContent,
-            categori: species,
-            filePath: imageDir,
-        };
+        const formData = new FormData();
+        formData.append("title", newTitle);
+        formData.append("content", newContent);
+        formData.append("categori", species);
+        formData.append("file", imageDir);
+        // formData.append("file", "");
 
-        dispatch(postActions.addPostDB(newObj));
+        for (let [key, val] of formData) console.log("FormData", key, val);
+
+        dispatch(postActions.addPostDB(formData));
         window.alert("작성 완료!");
         history.push("/");
     };
@@ -64,6 +61,9 @@ const PostWrite = (props) => {
                 <Input multiLine type="text" borderRadius="7px" placeholder="내용을 입력해주세요" _ref={content} />
                 <Text bold>이미지</Text>
                 <UploadImage getImage={getImageDir} _onClick={createNewContens} />
+                <Button margin="30px" height="40px" _onClick={createNewContens}>
+                    작성하기
+                </Button>
             </Wrapper>
         </React.Fragment>
     );

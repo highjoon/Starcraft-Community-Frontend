@@ -23,17 +23,56 @@
     },
     {
       "title": "저그 꿀팁",
-      "content": "저그 꿀팁입니다~",
       "categori": 1,
+      "id": 2,
       "filePath": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
+      "content": "리덕스 미들웨어를 직접 만들어보면 이해하기 쉽죠. "
+    },
+    {
+      "id": 2,
+      "categori": 2,
+      "title": "테스트 제목 (프로토스)",
+      "filePath": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
+      "content": "리덕스 미들웨어를 직접 만들어보면 이해하기 쉽죠. "
+    },
+    {
+      "id": 2,
+      "categori": 2,
+      "title": "테스트 제목 (프로토스)",
+      "filePath": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
+      "content": "리덕스 미들웨어를 직접 만들어보면 이해하기 쉽죠. "
+    },
+    {
+      "id": 2,
+      "categori": 2,
+      "title": "테스트 제목 (프로토스)",
+      "filePath": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
+      "content": "리덕스 미들웨어를 직접 만들어보면 이해하기 쉽죠. "
+    },
+    {
+      "id": 2,
+      "categori": 2,
+      "title": "테스트 제목 (프로토스)",
+      "filePath": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
+      "content": "리덕스 미들웨어를 직접 만들어보면 이해하기 쉽죠. "
+    },
+    {
+      "title": "테스트 제목 (저그)",
+      "content": "테스트 내용 (저그)",
+      "categori": 0,
+      "filePath": "/static/media/basicPostImg.67050ce8.jpg",
       "id": 3
     },
     {
-      "title": "111",
-      "content": "ddd",
+      "title": "테스트 제목 (프로토스)",
+      "content": "테스트 내용 (프로토스)",
       "categori": 2,
-      "filePath": "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
+      "filePath": "/static/media/basicPostImg.67050ce8.jpg",
       "id": 4
     }
-  ]
+  ],
+  "user": {
+    "email": "yundosa2@naver.com",
+    "password": "sj960527"
+  }
 }

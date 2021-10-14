@@ -11,18 +11,22 @@ const addPost = createAction(ADD_POST, (post) => ({ post }));
 const initialState = {
     postList: [
         {
-            categori: "저그",
-            title: "제목",
+            categori: 0,
+            title: "연결 끊겼을 시 나오는 임시 데이터",
             filePath: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
         },
     ],
 };
 
 const getPostDB = () => {
-    return (dispatch) => {
+    return (dispatch, getState, { history }) => {
         apis.getPost()
             .then((res) => {
                 const post_list = res.data;
+                post_list.forEach((post) => {
+                    const path = `http://54.180.148.132/display/${post.filePath}`;
+                    post.filePath = path;
+                });
                 dispatch(loadPost(post_list));
             })
             .catch((err) => {
@@ -33,6 +37,7 @@ const getPostDB = () => {
 
 const addPostDB = (post) => {
     return (dispatch) => {
+        console.log(post);
         apis.createPost(post)
             .then(() => {
                 dispatch(addPost(post));
