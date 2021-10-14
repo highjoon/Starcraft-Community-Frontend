@@ -13,13 +13,21 @@ const Header = (props) => {
     const is_login = useSelector((state) => state.user.is_login);
     const cookie = getCookie("user_login") ? true : false;
 
+    const confirmLogOut = () => {
+        if (window.confirm("로그아웃 하시겠습니까?")) {
+            dispatch(userActions.logOut());
+            window.alert("로그아웃 되었습니다.");
+            history.push("/");
+        }
+    };
+
     if (is_login && cookie) {
         return (
             <React.Fragment>
                 <Navbar>
                     <Logo src={starcraftImg} onClick={() => history.push("/")} />
                     <BtnContainer>
-                        <Button text="로그아웃" className="signOut_btn" _onClick={() => dispatch(userActions.logOut())} />
+                        <Button text="로그아웃" className="signOut_btn" _onClick={confirmLogOut} />
                     </BtnContainer>
                 </Navbar>
             </React.Fragment>
