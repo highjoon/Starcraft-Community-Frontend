@@ -5,7 +5,6 @@ import { Species } from "../components";
 import { Input, Text, Button } from "../elements";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { UploadImage } from "../shared";
-import basicPostImg from "../img/basicPostImg.jpg";
 
 const PostWrite = (props) => {
     const { history } = props;
@@ -35,7 +34,7 @@ const PostWrite = (props) => {
             return;
         }
         if (!imageDir) {
-            imageDir = basicPostImg;
+            imageDir = "basic.jpg";
         }
 
         const formData = new FormData();
@@ -43,6 +42,7 @@ const PostWrite = (props) => {
         formData.append("content", newContent);
         formData.append("categori", species);
         formData.append("file", imageDir);
+        // formData.append("file", "");
 
         for (let [key, val] of formData) console.log("FormData", key, val);
 

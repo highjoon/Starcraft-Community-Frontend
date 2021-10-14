@@ -6,8 +6,10 @@ import { actionCreators as postActions } from "../redux/modules/post";
 import zergImg from "../img/zerg.png";
 import protossImg from "../img/protoss.png";
 import terranImg from "../img/terran.png";
+import { useHistory } from "react-router";
 
 const Post = (props) => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const postList = useSelector((state) => state.post.postList);
     let category = null;
@@ -51,7 +53,7 @@ const Post = (props) => {
                             chooseCategory(post.categori);
                             if (!is_all && categorize !== category) return;
                             return (
-                                <PostContainer key={idx}>
+                                <PostContainer key={idx} onClick={() => history.push("/post")}>
                                     <Image src={categoryImageDir} />
                                     <Text size="18px" margin="5px">
                                         {post.title}

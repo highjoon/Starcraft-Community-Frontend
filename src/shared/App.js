@@ -7,6 +7,7 @@ import { history } from "../redux/configureStore";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { getCookie } from ".";
 import { Main, PostWrite, Login, SignUp } from "../pages";
+import PostDetail from "../pages/PostDetail";
 import { Header } from "../components";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/write" exact component={PostWrite} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component={SignUp} />
+                <Route path="/post" exact component={PostDetail} />
             </ConnectedRouter>
         </React.Fragment>
     );

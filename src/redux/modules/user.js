@@ -13,7 +13,7 @@ const LOGIN_CHECK = "LOGIN_CHECK";
 
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
-const loadUser = createAction(LOAD_USER, (user) => ({ user }));
+// const loadUser = createAction(LOAD_USER, (user) => ({ user }));
 const loginCheck = createAction(LOGIN_CHECK, (cookie) => ({ cookie }));
 // const setUser = createAction(SET_USER, (email) => ({ email }));
 // const addUser = createAction(ADD_USER, (userObj) => ({ userObj }));
@@ -27,18 +27,18 @@ const initialState = {
     is_login: false,
 };
 
-const getUserDB = () => {
-    return (dispatch) => {
-        apis.getUser()
-            .then((res) => {
-                const userData = res.data;
-                dispatch(loadUser(userData));
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-};
+// const getUserDB = () => {
+//     return (dispatch) => {
+//         apis.getUser()
+//             .then((res) => {
+//                 const userData = res.data;
+//                 dispatch(loadUser(userData));
+//             })
+//             .catch((err) => {
+//                 console.log(err);
+//             });
+//     };
+// };
 
 // const loginAction = (user) => {
 //     return (dispatch, getState, { history }) => {
@@ -49,36 +49,36 @@ const getUserDB = () => {
 
 const logInDB = (email, pwd) => {
     return (dispatch, getState, { history }) => {
-        apis.logIn({
-            email: email,
+        const loginPostData = {
+            username: email,
             password: pwd,
-        })
+        };
+        // console.log(JSON.stringify(loginPostData));
+        console.log(loginPostData);
+        // apis.logIn(JSON.stringify(loginPostData))
+        apis.logIn(loginPostData)
             .then((res) => {
                 console.log(res);
-                // res.data.token =
-                //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZWxvcGVydC5jb20iLCJleHAiOiIxNDg1MjcwMDAwMDAwIiwiaHR0cHM6Ly92ZWxvcGVydC5jb20vand0X2NsYWltcy9pc19hZG1pbiI6dHJ1ZSwidXNlcklkIjoiMTEwMjgzNzM3MjcxMDIiLCJ1c2VybmFtZSI6InZlbG9wZXJ0In0.WE5fMufM0NDSVGJ8cAolXGkyB5RmYwCto1pQwDIqo2w";
-                if (res.data.token != null) {
-                    console.log(res.data);
-                    const jwtToken = res.data.token;
-                    // const userNickName = res.data.userNick;
-                    setCookie("user_login", jwtToken);
-                    // localStorage.setItem("userNickName", userNickName);
-                    axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
-                    dispatch(
-                        logIn({
-                            email: email,
-                            password: pwd,
-                        })
-                    );
-                    window.alert(`로그인 성공! 이메일 : ${email}, 비밀번호 : ${pwd} (테스트용 임시 알림)`);
-                    history.push("/");
-                } else {
-                    window.alert("ID 또는 비밀번호를 다시 확인해주세요.");
-                }
+                // if (res.data.token != null) {
+                //     console.log(res.data);
+                //     const jwtToken = res.data.token;
+                //     setCookie("user_login", jwtToken);
+                //     axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
+                //     dispatch(
+                //         logIn({
+                //             email: email,
+                //             password: pwd,
+                //         })
+                //     );
+                //     window.alert(`로그인 성공! 이메일 : ${email}, 비밀번호 : ${pwd} (테스트용 임시 알림)`);
+                //     history.push("/");
+                // } else {
+                //     window.alert("ID 또는 비밀번호를 다시 확인해주세요.");
+                // }
             })
             .catch((err) => {
                 console.log(err);
-                window.alert("아이디 또는 비밀번호를 확인해주세요!");
+                window.alert("오류 발생!");
             });
     };
 };
@@ -138,7 +138,7 @@ const actionCreators = {
     logIn,
     loginCheck,
     logOut,
-    getUserDB,
+    // getUserDB,
     signUpDB,
     logInDB,
 };
