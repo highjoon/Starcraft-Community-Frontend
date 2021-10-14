@@ -8,8 +8,7 @@ import { history } from "../redux/configureStore";
 import Header from "../components/Header";
 import Main from "../pages/Main";
 import PostWrite from "../pages/PostWrite";
-import Login from "../components/Login";
-import SignUp from "../components/SignUp";
+import PostDetail from "../pages/PostDetail";
 
 function App() {
     return (
@@ -19,8 +18,7 @@ function App() {
                 <Header />
                 <Route path="/" exact component={Main} />
                 <Route path="/write" exact component={PostWrite} />
-                <Route path="/login" exact component={Login} />
-                <Route path="/signup" exact component={SignUp} />
+                <Route path="/post/:id" exact component={PostDetail}/>
             </ConnectedRouter>
         </React.Fragment>
     );
