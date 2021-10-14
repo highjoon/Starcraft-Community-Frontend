@@ -7,7 +7,6 @@ import { actionCreators as postActions } from "../redux/modules/post";
 import zergImg from "../img/zerg.png";
 import protossImg from "../img/protoss.png";
 import terranImg from "../img/terran.png";
-import { useHistory } from "react-router";
 
 const Post = (props) => {
     const history = useHistory();
@@ -19,10 +18,6 @@ const Post = (props) => {
 
     const { categorize } = props;
     categorize === "전체보기" ? (is_all = true) : (is_all = false);
-
-    const history = useHistory();
-    
-   
 
     useEffect(() => {
         dispatch(postActions.getPostDB());
@@ -57,7 +52,12 @@ const Post = (props) => {
                         chooseCategory(post.categori);
                         if (!is_all && categorize !== category) return;
                         return (
-                            <PostContainer key={idx} onClick={()=>{history.push(`/post/${post.id}`)}} >
+                            <PostContainer
+                                key={idx}
+                                onClick={() => {
+                                    history.push(`/post/${post.id}`);
+                                }}
+                            >
                                 <Image src={categoryImageDir} />
                                 <Text size="18px" margin="5px">
                                     {post.title}
@@ -83,7 +83,9 @@ const PostWrapper = styled.div`
     align-items: center;
     width: 100%;
     margin: 0 auto;
-    _onClick : ()=> {};
+    _onclick: () => {
+
+    } ;
 `;
 
 const PostContainer = styled.div`
@@ -98,7 +100,6 @@ const PostContainer = styled.div`
     &:hover {
         transform: scale(1.05);
     }
-    
 `;
 
 const PostImage = styled.img`

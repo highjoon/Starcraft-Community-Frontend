@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { Button, Text, Input } from "../elements";
+import { Button, Text } from "../elements";
 import { actionCreators as userActions } from "../redux/modules/user";
 
 function Login() {
@@ -24,17 +24,16 @@ function Login() {
 
     return (
         <Wrapper>
-            <InputBox>
-                <Title bold>로그인</Title>
-                <Text bold>이메일</Text>
-                <Input type="text" width="100%" borderRadius="7px" placeholder="이메일을 입력해주세요" _onChange={getEmail} />
-                <Text bold margin="70px auto 20px auto">
-                    비밀번호
-                </Text>
-                <Input type="text" width="100%" borderRadius="7px" placeholder="비밀번호를 입력해주세요" _onChange={getPwd} />
-                <Button margin="70px auto 0 auto" padding="22px" width="100%" className="submitBtn" _onClick={login}>
-                    로그인
-                </Button>
+            <InputBox className="input-wrapper">
+                <form action="http://54.180.148.132/user/login" method="post">
+                    <Text bold>이메일</Text>
+                    <input type="text" name="username" placeholder="userID" />
+                    <Text bold margin="70px auto 20px auto">
+                        비밀번호
+                    </Text>
+                    <input type="password" name="password" placeholder="password" />
+                    <Button type="submit">Sign In</Button>
+                </form>
             </InputBox>
         </Wrapper>
     );

@@ -59,22 +59,22 @@ const logInDB = (email, pwd) => {
         apis.logIn(loginPostData)
             .then((res) => {
                 console.log(res);
-                // if (res.data.token != null) {
-                //     console.log(res.data);
-                //     const jwtToken = res.data.token;
-                //     setCookie("user_login", jwtToken);
-                //     axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
-                //     dispatch(
-                //         logIn({
-                //             email: email,
-                //             password: pwd,
-                //         })
-                //     );
-                //     window.alert(`로그인 성공! 이메일 : ${email}, 비밀번호 : ${pwd} (테스트용 임시 알림)`);
-                //     history.push("/");
-                // } else {
-                //     window.alert("ID 또는 비밀번호를 다시 확인해주세요.");
-                // }
+                if (res.data.token != null) {
+                    console.log(res.data);
+                    const jwtToken = res.data.token;
+                    setCookie("user_login", jwtToken);
+                    axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
+                    dispatch(
+                        logIn({
+                            email: email,
+                            password: pwd,
+                        })
+                    );
+                    window.alert(`로그인 성공! 이메일 : ${email}, 비밀번호 : ${pwd} (테스트용 임시 알림)`);
+                    history.push("/");
+                } else {
+                    window.alert("ID 또는 비밀번호를 다시 확인해주세요.");
+                }
             })
             .catch((err) => {
                 console.log(err);
