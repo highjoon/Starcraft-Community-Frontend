@@ -44,29 +44,31 @@ const Post = (props) => {
 
     return (
         <React.Fragment>
-            <PostWrapper>
-                {postList
-                    .slice()
-                    .sort((a, b) => a.id - b.id)
-                    .map((post, idx) => {
-                        chooseCategory(post.categori);
-                        if (!is_all && categorize !== category) return;
-                        return (
-                            <PostContainer
-                                key={idx}
-                                onClick={() => {
-                                    history.push(`/post/${post.id}`);
-                                }}
-                            >
-                                <Image src={categoryImageDir} />
-                                <Text size="18px" margin="5px">
-                                    {post.title}
-                                </Text>
-                                <PostImage width="100%" src={post.filePath} />
-                            </PostContainer>
-                        );
-                    })}
-            </PostWrapper>
+            <WholeContainer>
+                <PostWrapper>
+                    {postList
+                        .slice()
+                        .sort((a, b) => a.id - b.id)
+                        .map((post, idx) => {
+                            chooseCategory(post.categori);
+                            if (!is_all && categorize !== category) return;
+                            return (
+                                <PostContainer
+                                    key={idx}
+                                    onClick={() => {
+                                        history.push(`/post/${post.id}`);
+                                    }}
+                                >
+                                    <Image src={categoryImageDir} />
+                                    <Text size="18px" margin="5px">
+                                        {post.title}
+                                    </Text>
+                                    <PostImage width="100%" src={post.filePath} />
+                                </PostContainer>
+                            );
+                        })}
+                </PostWrapper>
+            </WholeContainer>
         </React.Fragment>
     );
 };
@@ -83,9 +85,6 @@ const PostWrapper = styled.div`
     align-items: center;
     width: 100%;
     margin: 0 auto;
-    _onclick: () => {
-
-    } ;
 `;
 
 const PostContainer = styled.div`

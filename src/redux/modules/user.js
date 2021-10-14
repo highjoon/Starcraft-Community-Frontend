@@ -49,14 +49,10 @@ const initialState = {
 
 const logInDB = (email, pwd) => {
     return (dispatch, getState, { history }) => {
-        const loginPostData = {
-            username: email,
-            password: pwd,
-        };
-        // console.log(JSON.stringify(loginPostData));
-        console.log(loginPostData);
-        // apis.logIn(JSON.stringify(loginPostData))
-        apis.logIn(loginPostData)
+        const formData = new FormData();
+        formData.append("username", email);
+        formData.append("password", pwd);
+        apis.logIn(formData)
             .then((res) => {
                 console.log(res);
                 if (res.data.token != null) {
