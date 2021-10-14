@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { Button } from "../elements";
+import { Button, Text, Input } from "../elements";
 import { actionCreators as userActions } from "../redux/modules/user";
 
 function Login() {
@@ -22,15 +23,46 @@ function Login() {
     };
 
     return (
-        <div className="Login">
-            <p>아이디</p>
-            <input type="text" value={email} onChange={getEmail} />
-            <p>비밀번호</p>
-            <input type="password" value={password} onChange={getPwd} />
-            <br />
-            <Button type="submit" text="로그인" _onClick={login} />
-        </div>
+        <Wrapper>
+            <InputBox>
+                <Title bold>로그인</Title>
+                <Text bold>이메일</Text>
+                <Input type="text" width="100%" borderRadius="7px" placeholder="이메일을 입력해주세요" _onChange={getEmail} />
+                <Text bold margin="70px auto 20px auto">
+                    비밀번호
+                </Text>
+                <Input type="text" width="100%" borderRadius="7px" placeholder="비밀번호를 입력해주세요" _onChange={getPwd} />
+                <Button margin="70px auto 0 auto" padding="22px" width="100%" className="submitBtn" _onClick={login}>
+                    로그인
+                </Button>
+            </InputBox>
+        </Wrapper>
     );
 }
+
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 10px auto;
+
+    & .submitBtn {
+        display: block;
+    }
+`;
+
+const InputBox = styled.div`
+    flex-basis: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 50px;
+    text-align: center;
+`;
+
+const Title = styled.div`
+    font-size: 36px;
+    margin: 66px 0 55px 0;
+`;
 
 export default Login;
