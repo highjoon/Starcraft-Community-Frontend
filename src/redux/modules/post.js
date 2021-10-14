@@ -11,6 +11,7 @@ const addPost = createAction(ADD_POST, (post) => ({ post }));
 const initialState = {
     postList: [
         {
+            id: 1,
             categori: 0,
             title: "연결 끊겼을 시 나오는 임시 데이터",
             filePath: "https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg",
