@@ -13,15 +13,15 @@ const UploadImage = (props) => {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             imgBox.style.backgroundImage = `url(${reader.result})`;
-            getImage(reader.result);
+            getImage(file);
         };
     };
 
     return (
         <React.Fragment>
             <Preview className="img__box" />
-            <Input type="file" id="imgFile" onChange={selectFile} ref={fileInput} />
-            <label htmlFor="imgFile">이미지 등록하기</label>
+            <Input name="file" type="file" id="file" onChange={selectFile} ref={fileInput} accept="image/*" />
+            <label htmlFor="file">이미지 등록하기</label>
         </React.Fragment>
     );
 };
