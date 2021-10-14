@@ -15,12 +15,8 @@ const PostWrite = (props) => {
     let [imageDir, setImageDir] = useState("");
     const [species, setSpecies] = useState("");
 
-    const getSpecies = (species) => {
-        setSpecies(species);
-    };
-    const getImageDir = (imageDir) => {
-        setImageDir(imageDir);
-    };
+    const getSpecies = (species) => setSpecies(species);
+    const getImageDir = (imageDir) => setImageDir(imageDir);
 
     const createNewContens = () => {
         const newTitle = title.current.value;
@@ -38,19 +34,19 @@ const PostWrite = (props) => {
             window.alert("내용을 입력해주세요!");
             return;
         }
-
         if (!imageDir) {
             imageDir = basicPostImg;
         }
 
-        const newObj = {
-            title: newTitle,
-            content: newContent,
-            categori: species,
-            filePath: imageDir,
-        };
+        const formData = new FormData();
+        formData.append("title", newTitle);
+        formData.append("content", newContent);
+        formData.append("categori", species);
+        formData.append("file", imageDir);
 
-        dispatch(postActions.addPostDB(newObj));
+        for (let [key, val] of formData) console.log("FormData", key, val);
+
+        dispatch(postActions.addPostDB(formData));
         window.alert("작성 완료!");
         history.push("/");
     };

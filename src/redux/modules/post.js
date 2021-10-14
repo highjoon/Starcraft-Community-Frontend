@@ -19,7 +19,7 @@ const initialState = {
 };
 
 const getPostDB = () => {
-    return (dispatch) => {
+    return (dispatch, getState, { history }) => {
         apis.getPost()
             .then((res) => {
                 const post_list = res.data;
@@ -33,6 +33,7 @@ const getPostDB = () => {
 
 const addPostDB = (post) => {
     return (dispatch) => {
+        console.log(post);
         apis.createPost(post)
             .then(() => {
                 dispatch(addPost(post));

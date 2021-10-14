@@ -29,11 +29,11 @@ const Post = (props) => {
                 break;
             case 1:
                 category = "테란";
-                categoryImageDir = protossImg;
+                categoryImageDir = terranImg;
                 break;
             case 2:
                 category = "프로토스";
-                categoryImageDir = terranImg;
+                categoryImageDir = protossImg;
                 break;
             default:
                 category = "";

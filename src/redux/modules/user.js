@@ -55,14 +55,14 @@ const logInDB = (email, pwd) => {
         })
             .then((res) => {
                 console.log(res);
-                res.data.token =
-                    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZWxvcGVydC5jb20iLCJleHAiOiIxNDg1MjcwMDAwMDAwIiwiaHR0cHM6Ly92ZWxvcGVydC5jb20vand0X2NsYWltcy9pc19hZG1pbiI6dHJ1ZSwidXNlcklkIjoiMTEwMjgzNzM3MjcxMDIiLCJ1c2VybmFtZSI6InZlbG9wZXJ0In0.WE5fMufM0NDSVGJ8cAolXGkyB5RmYwCto1pQwDIqo2w";
+                // res.data.token =
+                //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZWxvcGVydC5jb20iLCJleHAiOiIxNDg1MjcwMDAwMDAwIiwiaHR0cHM6Ly92ZWxvcGVydC5jb20vand0X2NsYWltcy9pc19hZG1pbiI6dHJ1ZSwidXNlcklkIjoiMTEwMjgzNzM3MjcxMDIiLCJ1c2VybmFtZSI6InZlbG9wZXJ0In0.WE5fMufM0NDSVGJ8cAolXGkyB5RmYwCto1pQwDIqo2w";
                 if (res.data.token != null) {
                     console.log(res.data);
                     const jwtToken = res.data.token;
-                    const userNickName = res.data.userNick;
+                    // const userNickName = res.data.userNick;
                     setCookie("user_login", jwtToken);
-                    localStorage.setItem("userNickName", userNickName);
+                    // localStorage.setItem("userNickName", userNickName);
                     axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
                     dispatch(
                         logIn({
@@ -94,6 +94,7 @@ const signUpDB = (userObj) => {
             })
             .catch((err) => {
                 console.log("signUpDB 에서 오류 발생 ", err);
+                console.error(err.response.data);
                 window.alert("오류가 발생했습니다. 입력 정보를 다시 한번 확인해주세요!");
             });
     };
