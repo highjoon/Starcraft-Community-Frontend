@@ -1,24 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Text } from "../elements";
-import Post from "../components/Post";
+import { actionCreators as postActions } from "../redux/modules/post";
 
 const PostDetail = (props) => {
-    const { history } = props;
+    const dispatch = useDispatch();
     const postList = useSelector((state) => state.post.postList);
     const storedId = props.match.params.id;
+
+    useEffect(() => {
+        dispatch(postActions.getPostDB());
+    }, []);
 
     return (
         <React.Fragment>
             {postList.map((post, idx) => {
                 if (String(post.id) === String(storedId)) {
                     return (
-                        <Wrapper>
+                        <Wrapper key={idx}>
                             <Text size="35px" margin="10px" center bold>
                                 {post.title}
                             </Text>
-                            <Image src={post.filePath} alt="" />
+                            <ImageBox style={{ backgroundImage: `url(${post.filePath})` }} />
                             <TextContainer>
                                 <Text>{post.content}</Text>
                             </TextContainer>
@@ -36,23 +40,26 @@ const Wrapper = styled.div`
     text-align: center;
 `;
 
-const Image = styled.img`
+const ImageBox = styled.div`
     width: 500px;
     height: 500px;
-    border: 1px solid black;
     border-radius: 7px;
     margin: 10px auto;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 `;
 
 const TextContainer = styled.div`
     width: 700px;
     height: 200px;
-    border: 1px solid black;
     border-radius: 7px;
     margin: 20px auto;
     background-color: #fff;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    overflow-y: scroll;
 `;
 
 export default PostDetail;

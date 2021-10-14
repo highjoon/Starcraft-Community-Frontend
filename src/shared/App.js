@@ -1,24 +1,13 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import GlobalStyle from "../elements/GlobalStyle";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
-import { actionCreators as userActions } from "../redux/modules/user";
-import { getCookie } from ".";
 import { Main, PostWrite, Login, SignUp } from "../pages";
 import PostDetail from "../pages/PostDetail";
 import { Header } from "../components";
 
 function App() {
-    const dispatch = useDispatch();
-    // const cookie = getCookie("JSESSIONID") ? true : false;
-    console.log(document.cookie);
-
-    // useEffect(() => {
-    //     console.log(document.cookie);
-    //     if (cookie) dispatch(userActions.loginCheck(cookie));
-    // }, []);
     return (
         <React.Fragment>
             <GlobalStyle />
