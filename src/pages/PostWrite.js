@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Species } from "../components";
 import { Input, Text, Button } from "../elements";
@@ -13,9 +13,13 @@ const PostWrite = (props) => {
     const content = useRef();
     let [imageDir, setImageDir] = useState("");
     const [species, setSpecies] = useState("");
-
+    const post_list = useSelector((state) => state.post.list);
     const getSpecies = (species) => setSpecies(species);
     const getImageDir = (imageDir) => setImageDir(imageDir);
+
+    const post_id = props.match.params.id;
+    const is_edit = post_id ? true : false;
+    let _post = is_edit ? post_list.find((p) => p.id === post_id) : null;
 
     const createNewContens = () => {
         const newTitle = title.current.value;
