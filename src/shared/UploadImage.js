@@ -10,11 +10,16 @@ const UploadImage = (props) => {
         const reader = new FileReader();
         const file = fileInput.current.files[0];
         const imgBox = document.querySelector(".img__box");
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            imgBox.style.backgroundImage = `url(${reader.result})`;
-            getImage(file);
-        };
+        try {
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                imgBox.style.backgroundImage = `url(${reader.result})`;
+                getImage(file);
+            };
+        } catch {
+            window.alert("다시 시도해주세요");
+            return;
+        }
     };
 
     return (

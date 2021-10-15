@@ -91,7 +91,7 @@ const getPostDB = () => {
             .then((res) => {
                 const post_list = res.data;
                 post_list.forEach((post) => {
-                    const path = `http://54.180.148.132/display/${post.filePath}`;
+                    const path = `http://localhost:8080/display/${post.filePath}`;
                     post.filePath = path;
                 });
                 dispatch(loadPost(post_list));
