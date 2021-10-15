@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Text } from "../elements";
 import { useDetectOutsideClick } from "../hooks/useDetectOutsideClick";
 
-const Species = ({ species, getSpecies }) => {
+const Species = ({ species, getSpecies, origin }) => {
     const dropdownRef = useRef(null);
 
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);

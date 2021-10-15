@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
-import { Main, PostWrite, Login, SignUp, PostDetail } from "../pages";
+import { Main, PostWrite, Login, SignUp, PostDetail, PostEdit } from "../pages";
 import GlobalStyle from "../elements/GlobalStyle";
 import { Header } from "../components";
 import { actionCreators as userActions } from "../redux/modules/user";
@@ -27,6 +27,7 @@ function App() {
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component={SignUp} />
                 <Route path="/post" exact component={PostDetail} />
+                <Route path="/edit/:id" exact component={PostEdit} />
             </ConnectedRouter>
         </React.Fragment>
     );
