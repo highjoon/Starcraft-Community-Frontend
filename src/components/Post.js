@@ -85,9 +85,11 @@ const PostWrapper = styled.div`
     align-items: center;
     width: 100%;
     margin: 0 auto;
+    gap: 10px 10px;
 `;
 
 const PostContainer = styled.div`
+    flex-grow: 1;
     width: 300px;
     height: 400px;
     border-radius: 5px;
