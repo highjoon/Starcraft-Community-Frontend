@@ -22,10 +22,12 @@ const PostDetail = (props) => {
             window.alert("로그인이 필요합니다.");
             return;
         }
-        // if (writerNickname !== userNick) {
-        //     window.alert("권한이 없습니다.");
-        //     return;
-        // }
+        console.log(writerNickname);
+        console.log(userNick);
+        if (writerNickname !== userNick) {
+            window.alert("권한이 없습니다.");
+            return;
+        }
         if (window.confirm("게시물을 삭제하시겠습니까?")) {
             dispatch(postActions.deletePostDB(id));
         }
@@ -36,10 +38,12 @@ const PostDetail = (props) => {
             window.alert("로그인이 필요합니다.");
             return;
         }
-        // if (writerNickname !== userNick) {
-        //     window.alert("권한이 없습니다.");
-        //     return;
-        // }
+        console.log(writerNickname);
+        console.log(userNick);
+        if (writerNickname !== userNick) {
+            window.alert("권한이 없습니다.");
+            return;
+        }
         history.push(`/edit/${id}`);
     };
 
