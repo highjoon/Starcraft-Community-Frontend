@@ -29,16 +29,18 @@ const PostEdit = (props) => {
             return;
         }
 
-        const formData = new FormData();
-        formData.append("title", newTitle);
-        formData.append("content", newContent);
-        formData.append("categori", species);
+        // const formData = new FormData();
+        // formData.append("title", newTitle);
+        // formData.append("content", newContent);
+        // formData.append("categori", species);
+        const newObj = {
+            title: newTitle,
+            content: newContent,
+            categori: species,
+        };
 
-        for (let [key, val] of formData) {
-            console.log(key, val);
-        }
-
-        dispatch(postActions.editPostDB(storedId, formData));
+        // dispatch(postActions.editPostDB(storedId, formData));
+        dispatch(postActions.editPostDB(storedId, newObj));
     };
 
     return (

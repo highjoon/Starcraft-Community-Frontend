@@ -146,6 +146,7 @@ const editPostDB = (id, post) => {
             })
             .then((err) => {
                 console.log(err);
+                console.error(err);
             });
     };
 };

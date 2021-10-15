@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-    // baseURL: "http://54.180.148.132/",
-    baseURL: "http://localhost:8080/",
+    baseURL: "http://54.180.148.132/",
+    // baseURL: "http://localhost:8080/",
     headers: {
         "content-type": "application/json;charset=UTF-8",
         accept: "application/json",
@@ -22,7 +22,9 @@ export const apis = {
     editPost: (id, contents) =>
         instance.put(`/api/post/${id}`, contents, {
             headers: {
-                "content-type": "multipart/form-data",
+                // "content-type": "multipart/form-data;charset=UTF-8",
+                "content-type": "application/json",
+                "Access-Control-Allow-Origin": "*",
             },
         }),
 
