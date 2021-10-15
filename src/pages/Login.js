@@ -18,7 +18,6 @@ function Login() {
     };
 
     const login = () => {
-        console.log(email, password);
         dispatch(userActions.logInDB(email, password));
     };
 

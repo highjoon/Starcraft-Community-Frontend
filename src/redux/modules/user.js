@@ -1,7 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
-import { deleteCookie } from "../../shared";
 
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
@@ -9,9 +8,9 @@ const SET_USER = "SET_USER";
 const LOGIN_CHECK = "LOGIN_CHECK";
 
 const logIn = createAction(LOG_IN, (user) => ({ user }));
-const logOut = createAction(LOG_OUT, (is_login) => ({ is_login }));
+const logOut = createAction(LOG_OUT, (is_login, user) => ({ is_login, user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
-const logInCheck = createAction(LOGIN_CHECK, (is_login) => ({ is_login }));
+const logInCheck = createAction(LOGIN_CHECK, (is_login, user) => ({ is_login, user }));
 
 const initialState = {
     user: {
@@ -26,11 +25,16 @@ const logInCheckDB = () => {
     return (dispatch, getState, { history }) => {
         apis.getCheck()
             .then((res) => {
-                let is_login = res.data;
-                console.log("로그인 체크 응답 : ", is_login);
+                const is_login = res.data;
+                const username = localStorage.getItem("username");
+                const userNick = localStorage.getItem("userNick");
+                const userObj = {
+                    username: username,
+                    userNick: userNick,
+                };
+                dispatch(logInCheck(is_login, userObj));
             })
             .catch((err) => {
-                console.log("로그인 체크에서 오류 발생");
                 console.log(err);
             });
     };
@@ -43,13 +47,19 @@ const logInDB = (email, pwd) => {
         loginPostData.append("password", pwd);
         apis.logIn(loginPostData)
             .then((res) => {
-                console.log("로그인 응답 : ", res);
-                // let user = {
-                //     email: res.data.username,
-                //     userNick: res.data.userNick,
-                // };
-                // dispatch(setUser(user));
-                window.alert(`로그인 성공! 이메일 : ${email}, 비밀번호 : ${pwd} (테스트용 임시 알림)`);
+                if (res.data === false) {
+                    window.alert("로그인 실패");
+                    return;
+                }
+
+                let user = {
+                    username: res.data.id,
+                    userNick: res.data.userNick,
+                };
+                dispatch(setUser(user));
+                localStorage.setItem("username", res.data.id);
+                localStorage.setItem("userNick", res.data.userNick);
+                window.alert(`${res.data.userNick}님. 환영합니다!`);
                 history.push("/");
             })
             .catch((err) => {
@@ -63,14 +73,15 @@ const logOutDB = () => {
     return (dispatch, getState, { history }) => {
         apis.logOut()
             .then((res) => {
-                console.log("로그아웃 응답 : ", res);
-                // let is_login = false;
-                // dispatch(logOut(is_login));
+                let is_login = false;
+                let user = null;
+                dispatch(logOut(is_login, user));
+                localStorage.removeItem("username");
+                localStorage.removeItem("userNick");
                 window.alert("성공적으로 로그아웃 했습니다.");
                 history.push("/");
             })
             .then((err) => {
-                console.log("로그아웃에서 오류 발생");
                 console.log(err);
             });
     };
@@ -80,12 +91,10 @@ const signUpDB = (userObj) => {
     return (dispatch, getState, { history }) => {
         apis.signUp(userObj)
             .then((res) => {
-                console.log("회원가입 정보 ", res.data);
                 window.alert("회원가입에 성공했습니다.");
                 history.push("/login");
             })
             .catch((err) => {
-                console.log("signUpDB 에서 오류 발생 ", err);
                 console.error(err.response.data);
                 window.alert("오류가 발생했습니다. 입력 정보를 다시 한번 확인해주세요!");
             });
@@ -101,11 +110,13 @@ export default handleActions(
         [LOG_OUT]: (state, action) =>
             produce(state, (draft) => {
                 draft.is_login = action.payload.is_login;
+                draft.user = action.payload.user;
             }),
-        // [LOGIN_CHECK]: (state, action) =>
-        //     produce(state, (draft) => {
-        //         draft.is_login = action.payload.is_login;
-        //     }),
+        [LOGIN_CHECK]: (state, action) =>
+            produce(state, (draft) => {
+                draft.user = action.payload.user;
+                draft.is_login = action.payload.is_login;
+            }),
         [SET_USER]: (state, action) =>
             produce(state, (draft) => {
                 draft.user = action.payload.user;

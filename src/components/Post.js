@@ -79,18 +79,23 @@ const WholeContainer = styled.div`
 `;
 
 const PostWrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px 10px;
+
+    ${({ theme }) => theme.device.desktop} {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 10px;
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px 10px;
+    }
 `;
 
 const PostContainer = styled.div`
-    flex-grow: 1;
-    width: 300px;
+    width: 100%;
     height: 400px;
     border-radius: 5px;
     margin: 15px auto;
