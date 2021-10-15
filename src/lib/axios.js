@@ -1,11 +1,13 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "http://54.180.148.132/",
+    baseURL: "http://52.79.248.107:3000/",
+    // baseURL: "http://54.180.148.132/",
     // baseURL: "http://localhost:8080/",
     headers: {
         "content-type": "application/json;charset=UTF-8",
         accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
     },
 });
 
@@ -24,7 +26,6 @@ export const apis = {
             headers: {
                 // "content-type": "multipart/form-data;charset=UTF-8",
                 "content-type": "application/json",
-                "Access-Control-Allow-Origin": "*",
             },
         }),
 

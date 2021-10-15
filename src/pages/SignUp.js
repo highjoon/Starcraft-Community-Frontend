@@ -59,8 +59,6 @@ const SignUp = (props) => {
             passwordconfirm: pwd,
             userNick: nickName,
         };
-
-        console.log(userObj);
         dispatch(userActions.signUpDB(userObj));
     };
 

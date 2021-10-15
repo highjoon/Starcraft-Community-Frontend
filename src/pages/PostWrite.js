@@ -46,9 +46,10 @@ const PostWrite = (props) => {
         formData.append("content", newContent);
         formData.append("categori", species);
         formData.append("file", imageDir);
-        // formData.append("file", "");
 
-        for (let [key, val] of formData) console.log("FormData", key, val);
+        for (let [key, val] of formData) {
+            console.log(key, val);
+        }
 
         dispatch(postActions.addPostDB(formData));
         window.alert("작성 완료!");
