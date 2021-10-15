@@ -24,4 +24,6 @@ export const apis = {
                 "content-type": "multipart/form-data",
             },
         }),
+    logOut: () => instance.get("/user/logout"),
+    getCheck: () => instance.get("/api/checklogin"),
 };

@@ -10,7 +10,7 @@ const LOGIN_CHECK = "LOGIN_CHECK";
 
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
-const loginCheck = createAction(LOGIN_CHECK, (cookie) => ({ cookie }));
+const logInCheck = createAction(LOGIN_CHECK, (is_login) => ({ is_login }));
 
 const initialState = {
     user: {
@@ -19,6 +19,20 @@ const initialState = {
         userNick: "testNick",
     },
     is_login: false,
+};
+
+const logInCheckDB = () => {
+    return (dispatch, getState, { history }) => {
+        apis.getCheck()
+            .then((res) => {
+                let is_login = res.data;
+                console.log("로그인 체크 응답 : ", is_login);
+                // dispatch(logInCheck(is_login));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 };
 
 const logInDB = (email, pwd) => {
@@ -32,25 +46,22 @@ const logInDB = (email, pwd) => {
                 console.log(res);
                 window.alert(`로그인 성공! 이메일 : ${email}, 비밀번호 : ${pwd} (테스트용 임시 알림)`);
                 history.push("/");
-                // if (res.data.token != null) {
-                //     console.log(res.data);
-                //     const jwtToken = res.data.token;
-                //     setCookie("user_login", jwtToken);
-                //     axios.defaults.headers.common["Authorization"] = `${jwtToken}`;
-                //     dispatch(
-                //         logIn({
-                //             email: email,
-                //             password: pwd,
-                //         })
-                //     );
-
-                // } else {
-                //     window.alert("ID 또는 비밀번호를 다시 확인해주세요.");
-                // }
             })
             .catch((err) => {
                 console.log(err);
                 window.alert("오류 발생!");
+            });
+    };
+};
+
+const logOutDB = () => {
+    return (dispatch, getState, { history }) => {
+        apis.logOut()
+            .then((res) => {
+                console.log("로그아웃 응답 : ", res);
+            })
+            .then((err) => {
+                console.log(err);
             });
     };
 };
@@ -60,7 +71,6 @@ const signUpDB = (userObj) => {
         apis.signUp(userObj)
             .then((res) => {
                 console.log("회원가입 정보 ", res.data);
-                // dispatch(addUser(userObj));
                 window.alert("회원가입에 성공했습니다.");
                 history.push("/login");
             })
@@ -86,6 +96,10 @@ export default handleActions(
                 draft.user = null;
                 draft.is_login = false;
             }),
+        [LOGIN_CHECK]: (state, action) =>
+            produce(state, (draft) => {
+                draft.is_login = action.payload.is_login;
+            }),
         [LOAD_USER]: (state, action) =>
             produce(state, (draft) => {
                 draft.user = action.payload.user;
@@ -96,7 +110,8 @@ export default handleActions(
 
 const actionCreators = {
     logIn,
-    loginCheck,
+    logInCheckDB,
+    logOutDB,
     logOut,
     signUpDB,
     logInDB,
