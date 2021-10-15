@@ -63,18 +63,18 @@ const Input = styled.input`
         font-size: 20px;
         font-weight: bold;
         color: #fff;
-        background-color: #4a5666;
+        background-color: #37a2ff;
         border-radius: 7px;
         margin: 10px auto 0 auto;
         cursor: pointer;
-        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         transition: all 200ms ease-in-out;
     }
 
     & + label:hover {
-        color: #4a5666;
+        color: #37a2ff;
         background-color: #fff;
-        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         transition: all 200ms ease-in-out;
     }
 `;
