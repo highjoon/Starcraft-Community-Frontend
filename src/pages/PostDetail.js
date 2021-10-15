@@ -10,10 +10,38 @@ const PostDetail = (props) => {
     const history = useHistory();
     const postList = useSelector((state) => state.post.postList);
     const storedId = props.match.params.id;
+    const is_login = useSelector((state) => state.user.is_login);
+    const userNick = localStorage.getItem("userNick");
 
     useEffect(() => {
         dispatch(postActions.getPostDB());
     }, []);
+
+    const deletePost = (id, writerNickname) => {
+        if (!is_login) {
+            window.alert("로그인이 필요합니다.");
+            return;
+        }
+        // if (writerNickname !== userNick) {
+        //     window.alert("권한이 없습니다.");
+        //     return;
+        // }
+        if (window.confirm("게시물을 삭제하시겠습니까?")) {
+            dispatch(postActions.deletePostDB(id));
+        }
+    };
+
+    const editPost = (id, writerNickname) => {
+        if (!is_login) {
+            window.alert("로그인이 필요합니다.");
+            return;
+        }
+        // if (writerNickname !== userNick) {
+        //     window.alert("권한이 없습니다.");
+        //     return;
+        // }
+        history.push(`/edit/${id}`);
+    };
 
     return (
         <React.Fragment>
@@ -29,8 +57,8 @@ const PostDetail = (props) => {
                                 <Text>{post.content}</Text>
                             </TextContainer>
                             <BtnContainer>
-                                <Button margin="30px" height="40px" text="수정" _onClick={() => history.push(`/write/${post.id}`)} />
-                                <Button margin="30px" height="40px" text="삭제" _onClick={() => history.push("/")} />
+                                <Button margin="30px" height="40px" text="수정" _onClick={() => editPost(post.id, post.userNick)} />
+                                <Button margin="30px" height="40px" text="삭제" _onClick={() => deletePost(post.id, post.userNick)} />
                             </BtnContainer>
                         </Wrapper>
                     );
@@ -73,7 +101,6 @@ const BtnContainer = styled.div`
     margin: auto;
     display: flex;
     justify-content: space-around;
-
 `;
 
 export default PostDetail;

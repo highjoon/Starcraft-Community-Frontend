@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
-    const { width, borderRadius, label, placeholder, _onChange, type, multiLine, value, is_submit, onSubmit, is_file, _ref } = props;
+    const { width, borderRadius, label, placeholder, _onChange, type, multiLine, is_submit, onSubmit, is_file, _ref, _value } = props;
 
     if (is_file) {
         return <FileUpload type="file"></FileUpload>;
     }
 
     if (multiLine) {
-        return <ElTextarea rows={10} borderRadius={borderRadius} placeholder={placeholder} onChange={_onChange} ref={_ref} />;
+        return <ElTextarea rows={10} borderRadius={borderRadius} placeholder={placeholder} onChange={_onChange} ref={_ref} value={_value} />;
     }
 
     return (
@@ -21,7 +21,6 @@ const Input = (props) => {
                     borderRadius={borderRadius}
                     placeholder={placeholder}
                     onChange={_onChange}
-                    value={value}
                     onKeyPress={(e) => {
                         if (e.key === "Enter") {
                             onSubmit(e);
@@ -30,7 +29,7 @@ const Input = (props) => {
                     ref={_ref}
                 />
             ) : (
-                <ElInput type={type} width={width} borderRadius={borderRadius} placeholder={placeholder} onChange={_onChange} ref={_ref} />
+                <ElInput type={type} width={width} borderRadius={borderRadius} placeholder={placeholder} onChange={_onChange} ref={_ref} value={_value} />
             )}
         </React.Fragment>
     );

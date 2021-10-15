@@ -4,9 +4,13 @@ import { apis } from "../../lib/axios";
 
 const LOAD_POST = "LOAD_POST";
 const ADD_POST = "ADD_POST";
+const DELETE_POST = "DELETE_POST";
+const EDIT_POST = "EDIT_POST";
 
 const loadPost = createAction(LOAD_POST, (postList) => ({ postList }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
+const deletePost = createAction(DELETE_POST, (postId) => ({ postId }));
+const editPost = createAction(EDIT_POST, (postId, post) => ({ postId, post }));
 
 const initialState = {
     postList: [
@@ -106,10 +110,41 @@ const addPostDB = (post) => {
     return (dispatch) => {
         console.log(post);
         apis.createPost(post)
-            .then(() => {
+            .then((res) => {
+                console.log(res);
                 dispatch(addPost(post));
             })
             .catch((err) => {
+                console.log(err);
+            });
+    };
+};
+
+const deletePostDB = (id) => {
+    return (dispatch, getState, { history }) => {
+        apis.deletePost(id)
+            .then((res) => {
+                console.log(res);
+                dispatch(deletePost(id));
+                window.alert("삭제되었습니다.");
+                history.push("/");
+            })
+            .then((err) => {
+                console.log(err);
+            });
+    };
+};
+
+const editPostDB = (id, post) => {
+    return (dispatch, getState, { history }) => {
+        apis.editPost(id, post)
+            .then((res) => {
+                console.log(res);
+                dispatch(editPost(id, post));
+                window.alert("수정 완료!");
+                history.push(`/post/${id}`);
+            })
+            .then((err) => {
                 console.log(err);
             });
     };
@@ -125,6 +160,22 @@ export default handleActions(
             produce(state, (draft) => {
                 draft.postList.push(action.payload.post);
             }),
+        [DELETE_POST]: (state, action) =>
+            produce(state, (draft) => {
+                draft.postList = draft.postList.filter((post, idx) => {
+                    if (post.id !== action.payload.id) {
+                        return [...draft.postList, post];
+                    }
+                });
+            }),
+        [EDIT_POST]: (state, action) =>
+            produce(state, (draft) => {
+                let postIdx = draft.postList.findIndex((post) => post.id == action.payload.id);
+                console.log(postIdx);
+                console.log(action.payload.id);
+                draft.postList[postIdx] = { ...draft.postList[postIdx], ...action.payload.post };
+                console.log(draft.postList[postIdx]);
+            }),
     },
     initialState
 );
@@ -132,6 +183,8 @@ export default handleActions(
 const actionCreators = {
     getPostDB,
     addPostDB,
+    deletePostDB,
+    editPostDB,
 };
 
 export { actionCreators };

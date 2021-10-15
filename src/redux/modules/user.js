@@ -25,9 +25,9 @@ const logInCheckDB = () => {
     return (dispatch, getState, { history }) => {
         apis.getCheck()
             .then((res) => {
-                const is_login = res.data;
                 const username = localStorage.getItem("username");
                 const userNick = localStorage.getItem("userNick");
+                const is_login = localStorage.getItem("is_login");
                 const userObj = {
                     username: username,
                     userNick: userNick,
@@ -48,7 +48,7 @@ const logInDB = (email, pwd) => {
         apis.logIn(loginPostData)
             .then((res) => {
                 if (res.data === false) {
-                    window.alert("로그인 실패");
+                    window.alert("아이디와 비밀번호를 다시 확인해주세요.");
                     return;
                 }
 
@@ -59,6 +59,7 @@ const logInDB = (email, pwd) => {
                 dispatch(setUser(user));
                 localStorage.setItem("username", res.data.id);
                 localStorage.setItem("userNick", res.data.userNick);
+                localStorage.setItem("is_login", true);
                 window.alert(`${res.data.userNick}님. 환영합니다!`);
                 history.push("/");
             })
@@ -78,6 +79,7 @@ const logOutDB = () => {
                 dispatch(logOut(is_login, user));
                 localStorage.removeItem("username");
                 localStorage.removeItem("userNick");
+                localStorage.removeItem("is_login");
                 window.alert("성공적으로 로그아웃 했습니다.");
                 history.push("/");
             })
