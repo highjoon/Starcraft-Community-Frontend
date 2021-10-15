@@ -5,11 +5,12 @@ import { deleteCookie } from "../../shared";
 
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
-const LOAD_USER = "LOAD_USER";
+const SET_USER = "SET_USER";
 const LOGIN_CHECK = "LOGIN_CHECK";
 
 const logIn = createAction(LOG_IN, (user) => ({ user }));
-const logOut = createAction(LOG_OUT, (user) => ({ user }));
+const logOut = createAction(LOG_OUT, (is_login) => ({ is_login }));
+const setUser = createAction(SET_USER, (user) => ({ user }));
 const logInCheck = createAction(LOGIN_CHECK, (is_login) => ({ is_login }));
 
 const initialState = {
@@ -27,9 +28,9 @@ const logInCheckDB = () => {
             .then((res) => {
                 let is_login = res.data;
                 console.log("로그인 체크 응답 : ", is_login);
-                // dispatch(logInCheck(is_login));
             })
             .catch((err) => {
+                console.log("로그인 체크에서 오류 발생");
                 console.log(err);
             });
     };
@@ -40,16 +41,20 @@ const logInDB = (email, pwd) => {
         let loginPostData = new FormData();
         loginPostData.append("username", email);
         loginPostData.append("password", pwd);
-        console.log(loginPostData);
         apis.logIn(loginPostData)
             .then((res) => {
-                console.log(res);
+                console.log("로그인 응답 : ", res);
+                // let user = {
+                //     email: res.data.username,
+                //     userNick: res.data.userNick,
+                // };
+                // dispatch(setUser(user));
                 window.alert(`로그인 성공! 이메일 : ${email}, 비밀번호 : ${pwd} (테스트용 임시 알림)`);
                 history.push("/");
             })
             .catch((err) => {
+                console.log("로그인에서 오류 발생");
                 console.log(err);
-                window.alert("오류 발생!");
             });
     };
 };
@@ -59,8 +64,13 @@ const logOutDB = () => {
         apis.logOut()
             .then((res) => {
                 console.log("로그아웃 응답 : ", res);
+                // let is_login = false;
+                // dispatch(logOut(is_login));
+                window.alert("성공적으로 로그아웃 했습니다.");
+                history.push("/");
             })
             .then((err) => {
+                console.log("로그아웃에서 오류 발생");
                 console.log(err);
             });
     };
@@ -86,23 +96,20 @@ export default handleActions(
     {
         [LOG_IN]: (state, action) =>
             produce(state, (draft) => {
-                draft.user = action.payload.user;
                 draft.is_login = true;
             }),
         [LOG_OUT]: (state, action) =>
             produce(state, (draft) => {
-                deleteCookie("user_login");
-                localStorage.removeItem("userNickName");
-                draft.user = null;
-                draft.is_login = false;
-            }),
-        [LOGIN_CHECK]: (state, action) =>
-            produce(state, (draft) => {
                 draft.is_login = action.payload.is_login;
             }),
-        [LOAD_USER]: (state, action) =>
+        // [LOGIN_CHECK]: (state, action) =>
+        //     produce(state, (draft) => {
+        //         draft.is_login = action.payload.is_login;
+        //     }),
+        [SET_USER]: (state, action) =>
             produce(state, (draft) => {
                 draft.user = action.payload.user;
+                draft.is_login = true;
             }),
     },
     initialState
