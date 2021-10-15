@@ -20,7 +20,8 @@ export const apis = {
     logIn: (contents) =>
         instance.post("/user/login", contents, {
             headers: {
-                "content-type": "application/x-www-form-urlencoded",
+                // "content-type": "application/x-www-form-urlencoded",
+                "content-type": "multipart/form-data",
             },
         }),
 };
