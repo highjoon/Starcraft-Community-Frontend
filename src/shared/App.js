@@ -12,9 +12,9 @@ function App() {
     const dispatch = useDispatch();
     const is_login = useSelector((state) => state.user.is_login);
 
-    useEffect(() => {
-        dispatch(userActions.logInCheckDB());
-    });
+    // useEffect(() => {
+    //     dispatch(userActions.logInCheckDB());
+    // });
 
     return (
         <React.Fragment>
