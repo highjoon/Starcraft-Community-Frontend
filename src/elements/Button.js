@@ -38,16 +38,16 @@ const DefaultButton = styled.button`
     line-height: calc(${(props) => props.height} / 3);
     ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
     padding: ${(props) => props.padding};
-    background-color: #4a5666;
+    background-color: #37a2ff;
     color: #ffffff;
-    border: 1px solid #4a5666;
+    border: 1px solid #37a2ff;
     border-radius: 7px;
     box-sizing: border-box;
     font-family: "NanumSquareB";
     font-size: 20px;
     font-weight: bold;
     transition: all 200ms ease-in-out;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 
     &.AddBtn {
         position: fixed;
@@ -60,8 +60,8 @@ const DefaultButton = styled.button`
         font-weight: bold;
         border: 1px solid #ffffff;
         background-color: #ffffff;
-        color: #4a5666;
-        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+        color: #37a2ff;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     }
 `;
 

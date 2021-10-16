@@ -72,7 +72,7 @@ const MenuContainer = styled.div`
 `;
 
 const TriggerBtn = styled.button`
-    background-color: #4a5666;
+    background-color: #37a2ff;
     color: #ffffff;
     border-radius: 90px;
     cursor: pointer;
@@ -80,7 +80,7 @@ const TriggerBtn = styled.button`
     justify-content: center;
     align-items: center;
     padding: 4px 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     border: none;
     transition: box-shadow 0.4s ease;
     margin-left: auto;
