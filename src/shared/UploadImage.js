@@ -39,6 +39,16 @@ const Preview = styled.div`
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 7px;
+
+    ${({ theme }) => theme.device.desktop} {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        width: 60%;
+        margin: 0 auto;
+    }
 `;
 
 const Input = styled.input`
@@ -76,6 +86,28 @@ const Input = styled.input`
         background-color: #fff;
         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         transition: all 200ms ease-in-out;
+    }
+
+    ${({ theme }) => theme.device.desktop} {
+        & + label {
+            font-size: 15px;
+            height: 50px;
+        }
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        & + label {
+            font-size: 13px;
+            height: 20px;
+            line-height: 50%;
+            padding: 15px;
+        }
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        & + label {
+            font-size: 10px;
+        }
     }
 `;
 

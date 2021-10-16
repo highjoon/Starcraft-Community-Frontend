@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
+import { config } from "../../shared/config";
 
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
@@ -42,11 +43,16 @@ const logInCheckDB = () => {
 
 const logInDB = (email, pwd) => {
     return (dispatch, getState, { history }) => {
-        let loginPostData = new FormData();
-        loginPostData.append("username", email);
-        loginPostData.append("password", pwd);
+        // let loginPostData = new FormData();
+        // loginPostData.append("username", email);
+        // loginPostData.append("password", pwd);
+        let loginPostData = {
+            username: email,
+            password: pwd,
+        };
         apis.logIn(loginPostData)
             .then((res) => {
+                console.log(res.data);
                 if (res.data === false) {
                     window.alert("아이디와 비밀번호를 다시 확인해주세요.");
                     return;

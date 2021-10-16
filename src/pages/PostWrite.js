@@ -13,13 +13,8 @@ const PostWrite = (props) => {
     const content = useRef();
     let [imageDir, setImageDir] = useState("");
     const [species, setSpecies] = useState("");
-    const post_list = useSelector((state) => state.post.list);
     const getSpecies = (species) => setSpecies(species);
     const getImageDir = (imageDir) => setImageDir(imageDir);
-
-    const post_id = props.match.params.id;
-    const is_edit = post_id ? true : false;
-    let _post = is_edit ? post_list.find((p) => p.id === post_id) : null;
 
     const createNewContens = () => {
         const newTitle = title.current.value;
@@ -61,9 +56,9 @@ const PostWrite = (props) => {
             <Wrapper>
                 <Species species={species} getSpecies={getSpecies} />
                 <Text bold>제목</Text>
-                <Input type="text" width="100%" borderRadius="7px" placeholder="제목을 입력해주세요" _ref={title} />
+                <Input className="title" type="text" width="100%" borderRadius="7px" placeholder="제목을 입력해주세요" _ref={title} />
                 <Text bold>내용</Text>
-                <Input multiLine type="text" borderRadius="7px" placeholder="내용을 입력해주세요" _ref={content} />
+                <Input className="content" multiLine type="text" borderRadius="7px" placeholder="내용을 입력해주세요" _ref={content} />
                 <Text bold>이미지</Text>
                 <UploadImage getImage={getImageDir} _onClick={createNewContens} />
                 <Button margin="30px" height="40px" _onClick={createNewContens}>
@@ -78,6 +73,35 @@ const Wrapper = styled.div`
     width: 600px;
     margin: 0 auto;
     text-align: center;
+
+    ${({ theme }) => theme.device.desktop} {
+        & .title,
+        & .content {
+            width: 500px;
+        }
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        & .title,
+        & .content {
+            width: 300px;
+            height: 70px;
+
+            &::placeholder {
+                text-align: center;
+                line-height: 100%;
+                font-size: 12px;
+            }
+        }
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        & .title,
+        & .content {
+            width: 200px;
+            height: 50px;
+        }
+    }
 `;
 
 export default PostWrite;

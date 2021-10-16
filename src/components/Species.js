@@ -69,6 +69,33 @@ const MenuContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    ${({ theme }) => theme.device.desktop} {
+        & button {
+            width: 250px;
+        }
+        & p {
+            font-size: 15px;
+        }
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        & button {
+            width: 200px;
+        }
+        & p {
+            font-size: 13px;
+        }
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        & button {
+            width: 150px;
+        }
+        & p {
+            font-size: 10px;
+        }
+    }
 `;
 
 const TriggerBtn = styled.button`

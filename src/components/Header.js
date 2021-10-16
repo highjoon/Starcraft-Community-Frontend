@@ -23,7 +23,7 @@ const Header = (props) => {
                 <Navbar>
                     <Logo src={starcraftImg} onClick={() => history.push("/")} />
                     <BtnContainer>
-                        <Button text="로그아웃" className="signOut_btn" _onClick={confirmLogOut} />
+                        <Button text="로그아웃" width="150px" height="40px" className="signOut_btn" _onClick={confirmLogOut} />
                     </BtnContainer>
                 </Navbar>
             </React.Fragment>
@@ -34,8 +34,8 @@ const Header = (props) => {
                 <Navbar>
                     <Logo src={starcraftImg} onClick={() => history.push("/")} />
                     <BtnContainer>
-                        <Button text="로그인" className="signIn_btn" _onClick={() => history.push("/login")} />
-                        <Button text="회원가입" className="signUp_btn" _onClick={() => history.push("/signup")} />
+                        <Button text="로그인" width="150px" height="40px" className="signIn_btn" _onClick={() => history.push("/login")} />
+                        <Button text="회원가입" width="150px" height="40px" className="signUp_btn" _onClick={() => history.push("/signup")} />
                     </BtnContainer>
                 </Navbar>
             </React.Fragment>
@@ -59,6 +59,21 @@ const Logo = styled.img`
     margin-bottom: 10px;
     margin-left: 10%;
     cursor: pointer;
+
+    ${({ theme }) => theme.device.desktop} {
+        width: 120px;
+        height: 60px;
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        width: 100px;
+        height: 50px;
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        width: 80px;
+        height: 30px;
+    }
 `;
 
 const BtnContainer = styled.div`

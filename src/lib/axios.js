@@ -1,14 +1,18 @@
 import axios from "axios";
 
 const instance = axios.create({
-    // baseURL: "http://52.79.248.107:3000/",
-    // baseURL: "http://54.180.148.132/",
-    baseURL: "http://localhost:3000/",
+    baseURL: "http://54.180.148.132:8080/",
     headers: {
         "content-type": "application/json;charset=UTF-8",
         accept: "application/json",
         "Access-Control-Allow-Origin": "*",
     },
+});
+
+instance.interceptors.request.use(function (config) {
+    const accessToken = document.cookie.split("=")[1];
+    config.headers.common["X-AUTH-TOKEN"] = `${accessToken}`;
+    return config;
 });
 
 export const apis = {
@@ -24,7 +28,6 @@ export const apis = {
     editPost: (id, contents) =>
         instance.put(`/api/post/${id}`, contents, {
             headers: {
-                // "content-type": "multipart/form-data;charset=UTF-8",
                 "content-type": "application/json",
             },
         }),
@@ -33,8 +36,8 @@ export const apis = {
     logIn: (contents) =>
         instance.post("/user/login", contents, {
             headers: {
-                // "content-type": "application/x-www-form-urlencoded",
-                "content-type": "multipart/form-data",
+                // "content-type": "multipart/form-data",
+                "content-type": "application/json",
             },
         }),
     logOut: () => instance.get("/user/logout"),
