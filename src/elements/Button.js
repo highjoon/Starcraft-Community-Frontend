@@ -49,6 +49,19 @@ const DefaultButton = styled.button`
     transition: all 200ms ease-in-out;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 
+    &.AddBtn {
+        position: fixed;
+        right: 5%;
+        bottom: 10%;
+    }
+
+    &:hover {
+        border: 1px solid #ffffff;
+        background-color: #ffffff;
+        color: #37a2ff;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
     ${({ theme }) => theme.device.desktop} {
         font-size: 15px;
 
@@ -93,7 +106,9 @@ const DefaultButton = styled.button`
     }
 
     ${({ theme }) => theme.device.mobile} {
-        font-size: 10px;
+        font-size: 11px;
+        padding: 0;
+        height: 30px;
 
         &.signIn_btn,
         &.signUp_btn,
@@ -105,19 +120,6 @@ const DefaultButton = styled.button`
         &.submitBtn {
             margin-top: 30px;
         }
-    }
-
-    &.AddBtn {
-        position: fixed;
-        right: 5%;
-        bottom: 10%;
-    }
-
-    &:hover {
-        border: 1px solid #ffffff;
-        background-color: #ffffff;
-        color: #37a2ff;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     }
 `;
 

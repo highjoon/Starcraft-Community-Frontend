@@ -42,10 +42,8 @@ const getPostDB = () => {
 
 const addPostDB = (post) => {
     return (dispatch) => {
-        console.log(post);
         apis.createPost(post)
             .then((res) => {
-                console.log(res);
                 dispatch(addPost(post));
             })
             .catch((err) => {
@@ -58,7 +56,6 @@ const deletePostDB = (id) => {
     return (dispatch, getState, { history }) => {
         apis.deletePost(id)
             .then((res) => {
-                console.log(res);
                 dispatch(deletePost(id));
                 window.alert("삭제되었습니다.");
                 history.push("/");
@@ -73,14 +70,12 @@ const editPostDB = (id, post) => {
     return (dispatch, getState, { history }) => {
         apis.editPost(id, post)
             .then((res) => {
-                console.log(res);
                 dispatch(editPost(id, post));
                 window.alert("수정 완료!");
                 history.push(`/post/${id}`);
             })
             .then((err) => {
                 console.log(err);
-                console.error(err);
             });
     };
 };
@@ -106,10 +101,7 @@ export default handleActions(
         [EDIT_POST]: (state, action) =>
             produce(state, (draft) => {
                 let postIdx = draft.postList.findIndex((post) => post.id == action.payload.id);
-                console.log(postIdx);
-                console.log(action.payload.id);
                 draft.postList[postIdx] = { ...draft.postList[postIdx], ...action.payload.post };
-                console.log(draft.postList[postIdx]);
             }),
     },
     initialState

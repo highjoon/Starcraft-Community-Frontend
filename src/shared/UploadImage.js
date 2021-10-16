@@ -42,11 +42,13 @@ const Preview = styled.div`
 
     ${({ theme }) => theme.device.desktop} {
         width: 80%;
+        height: 300px;
         margin: 0 auto;
     }
 
     ${({ theme }) => theme.device.tablet} {
         width: 60%;
+        height: 250px;
         margin: 0 auto;
     }
 `;
