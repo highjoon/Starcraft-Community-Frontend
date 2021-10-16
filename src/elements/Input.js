@@ -2,20 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
-    const { width, borderRadius, label, placeholder, _onChange, type, multiLine, is_submit, onSubmit, is_file, _ref, _value } = props;
+    const { width, borderRadius, label, placeholder, _onChange, type, multiLine, is_submit, onSubmit, is_file, _ref, _value, className } = props;
 
     if (is_file) {
-        return <FileUpload type="file"></FileUpload>;
+        return <FileUpload className={className} type="file"></FileUpload>;
     }
 
     if (multiLine) {
-        return <ElTextarea rows={10} borderRadius={borderRadius} placeholder={placeholder} onChange={_onChange} ref={_ref} value={_value} />;
+        return <ElTextarea className={className} rows={10} borderRadius={borderRadius} placeholder={placeholder} onChange={_onChange} ref={_ref} value={_value} />;
     }
 
     return (
         <React.Fragment>
             {is_submit ? (
                 <ElInput
+                    className={className}
                     type={type}
                     width={width}
                     borderRadius={borderRadius}
@@ -29,7 +30,7 @@ const Input = (props) => {
                     ref={_ref}
                 />
             ) : (
-                <ElInput type={type} width={width} borderRadius={borderRadius} placeholder={placeholder} onChange={_onChange} ref={_ref} value={_value} />
+                <ElInput className={className} type={type} width={width} borderRadius={borderRadius} placeholder={placeholder} onChange={_onChange} ref={_ref} value={_value} />
             )}
         </React.Fragment>
     );
@@ -38,14 +39,14 @@ const Input = (props) => {
 Input.defaultProps = {
     multiLine: false,
     label: false,
-    placeholder: "텍스트를 입력해주세요.",
-    type: "text",
-    value: "",
     is_submit: false,
+    type: "text",
+    width: "40%",
+    placeholder: "텍스트를 입력해주세요.",
+    value: "",
+    borderRadius: null,
     onSubmit: () => {},
     _onChange: () => {},
-    width: "40%",
-    borderRadius: null,
 };
 
 const ElTextarea = styled.textarea`
@@ -72,6 +73,15 @@ const ElInput = styled.input`
 
     &::placeholder {
         text-align: center;
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        padding: 10px 4px;
+        font-size: 10px;
+
+        &::placeholder {
+            font-size: 10px;
+        }
     }
 `;
 

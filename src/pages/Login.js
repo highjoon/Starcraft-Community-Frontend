@@ -22,24 +22,13 @@ function Login() {
     };
 
     return (
-        // <Wrapper>
-        //     <InputBox className="input-wrapper">
-        //         <form action="http://54.180.148.132/user/login" method="post">
-        //             <Text bold>이메일</Text>
-        //             <input type="text" name="username" placeholder="userID" />
-        //             <Text bold margin="70px auto 20px auto">
-        //                 비밀번호
-        //             </Text>
-        //             <input type="password" name="password" placeholder="password" />
-        //             <Button type="submit">Sign In</Button>
-        //         </form>
-        //     </InputBox>
-        // </Wrapper>
         <Wrapper>
             <InputBox>
-                <Text bold>이메일</Text>
+                <Text bold className="email">
+                    이메일
+                </Text>
                 <Input type="text" width="100%" borderRadius="7px" placeholder="이메일을 입력해주세요" _onChange={getEmail} />
-                <Text bold margin="70px auto 20px auto">
+                <Text bold margin="70px auto 20px auto" className="password">
                     비밀번호
                 </Text>
                 <Input type="text" width="100%" borderRadius="7px" placeholder="비밀번호를 입력해주세요" _onChange={getPwd} />
@@ -60,6 +49,10 @@ const Wrapper = styled.div`
     & .submitBtn {
         display: block;
     }
+
+    ${({ theme }) => theme.device.desktop} {
+        height: 300px;
+    }
 `;
 
 const InputBox = styled.div`
@@ -69,11 +62,6 @@ const InputBox = styled.div`
     justify-content: space-between;
     margin-left: 50px;
     text-align: center;
-`;
-
-const Title = styled.div`
-    font-size: 36px;
-    margin: 66px 0 55px 0;
 `;
 
 export default Login;
