@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
+import { deleteCookie, setCookie } from "../../shared/Cookie";
 import { apis } from "../../lib/axios";
-import { config } from "../../shared/config";
 
 const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
@@ -22,79 +22,6 @@ const initialState = {
     is_login: false,
 };
 
-const logInCheckDB = () => {
-    return (dispatch, getState, { history }) => {
-        apis.getCheck()
-            .then((res) => {
-                const username = localStorage.getItem("username");
-                const userNick = localStorage.getItem("userNick");
-                const is_login = localStorage.getItem("is_login");
-                const userObj = {
-                    username: username,
-                    userNick: userNick,
-                };
-                dispatch(logInCheck(is_login, userObj));
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-};
-
-const logInDB = (email, pwd) => {
-    return (dispatch, getState, { history }) => {
-        // let loginPostData = new FormData();
-        // loginPostData.append("username", email);
-        // loginPostData.append("password", pwd);
-        let loginPostData = {
-            username: email,
-            password: pwd,
-        };
-        apis.logIn(loginPostData)
-            .then((res) => {
-                console.log(res.data);
-                if (res.data === false) {
-                    window.alert("아이디와 비밀번호를 다시 확인해주세요.");
-                    return;
-                }
-
-                let user = {
-                    username: res.data.id,
-                    userNick: res.data.userNick,
-                };
-                dispatch(setUser(user));
-                localStorage.setItem("username", res.data.id);
-                localStorage.setItem("userNick", res.data.userNick);
-                localStorage.setItem("is_login", true);
-                window.alert(`${res.data.userNick}님. 환영합니다!`);
-                history.push("/");
-            })
-            .catch((err) => {
-                console.log("로그인에서 오류 발생");
-                console.log(err);
-            });
-    };
-};
-
-const logOutDB = () => {
-    return (dispatch, getState, { history }) => {
-        apis.logOut()
-            .then((res) => {
-                let is_login = false;
-                let user = null;
-                dispatch(logOut(is_login, user));
-                localStorage.removeItem("username");
-                localStorage.removeItem("userNick");
-                localStorage.removeItem("is_login");
-                window.alert("성공적으로 로그아웃 했습니다.");
-                history.push("/");
-            })
-            .then((err) => {
-                console.log(err);
-            });
-    };
-};
-
 const signUpDB = (userObj) => {
     return (dispatch, getState, { history }) => {
         apis.signUp(userObj)
@@ -106,6 +33,98 @@ const signUpDB = (userObj) => {
                 console.error(err.response.data);
                 window.alert("오류가 발생했습니다. 입력 정보를 다시 한번 확인해주세요!");
             });
+    };
+};
+
+const logInDB = (email, pwd) => {
+    return (dispatch, getState, { history }) => {
+        // let loginPostData = new FormData();
+        // loginPostData.append("username", email);
+        // loginPostData.append("password", pwd);
+        let loginPostData = {
+            user: {
+                username: email,
+                password: pwd,
+            },
+        };
+        // console.log(loginPostData);
+        apis.logIn(loginPostData)
+            .then((res) => {
+                console.log("response값 들어옴!");
+                console.log(res);
+                // console.log(res.data);
+                // setCookie("token", res.data[1].token, 7);
+                // localStorage.setItem("username", res.data.id);
+                // localStorage.setItem("userNick", res.data.userNick);
+                // localStorage.setItem("is_login", true);
+                // let user = {
+                //     username: res.data.id,
+                //     userNick: res.data.userNick,
+                // };
+                // dispatch(setUser(user));
+                // window.alert(`${res.data.userNick}님. 환영합니다!`);
+                // history.push("/");
+            })
+            .catch((err) => {
+                window.alert("오류가 발생했습니다.");
+                console.log(err);
+            });
+    };
+};
+
+const logInCheckDB = () => {
+    return (dispatch, getState, { history }) => {
+        const tokenCheck = document.cookie;
+        if (tokenCheck) {
+            const username = localStorage.getItem("username");
+            const userNick = localStorage.getItem("userNick");
+            const is_login = localStorage.getItem("is_login");
+            const userObj = {
+                username: username,
+                userNick: userNick,
+            };
+            dispatch(logInCheck(is_login, userObj));
+        } else {
+            let is_login = false;
+            let user = null;
+            dispatch(logOut(is_login, user));
+        }
+    };
+};
+
+//  apis.getCheck()
+//      .then((res) => {
+//  const username = localStorage.getItem("username");
+//  const userNick = localStorage.getItem("userNick");
+//  const is_login = localStorage.getItem("is_login");
+//          const tokenCheck = document.cookie;
+//          if (tokenCheck) {
+//  const userObj = {
+//      username: username,
+//      userNick: userNick,
+//  };
+//  dispatch(logInCheck(is_login, userObj));
+//          } else {
+//  is_login = false;
+//  let user = null;
+//  dispatch(logOut(is_login, user));
+//          }
+//      })
+//      .catch((err) => {
+//          console.log(err);
+//      });
+
+const logOutDB = () => {
+    return (dispatch, getState, { history }) => {
+        let is_login = false;
+        let user = null;
+        dispatch(logOut(is_login, user));
+        deleteCookie("token");
+        localStorage.removeItem("username");
+        localStorage.removeItem("userNick");
+        localStorage.removeItem("is_login");
+        window.alert("성공적으로 로그아웃 했습니다.");
+        history.push("/");
     };
 };
 
