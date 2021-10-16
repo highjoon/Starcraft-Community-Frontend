@@ -11,7 +11,7 @@ const PostDetail = (props) => {
     const postList = useSelector((state) => state.post.postList);
     const storedId = props.match.params.id;
     const is_login = useSelector((state) => state.user.is_login);
-    const userNick = localStorage.getItem("userNick");
+    const username = localStorage.getItem("username");
 
     useEffect(() => {
         dispatch(postActions.getPostDB());
@@ -22,9 +22,7 @@ const PostDetail = (props) => {
             window.alert("로그인이 필요합니다.");
             return;
         }
-        console.log(writerNickname);
-        console.log(userNick);
-        if (writerNickname !== userNick) {
+        if (writerNickname !== username) {
             window.alert("권한이 없습니다.");
             return;
         }
@@ -38,9 +36,7 @@ const PostDetail = (props) => {
             window.alert("로그인이 필요합니다.");
             return;
         }
-        console.log(writerNickname);
-        console.log(userNick);
-        if (writerNickname !== userNick) {
+        if (writerNickname !== username) {
             window.alert("권한이 없습니다.");
             return;
         }
@@ -61,8 +57,8 @@ const PostDetail = (props) => {
                                 <Text>{post.content}</Text>
                             </TextContainer>
                             <BtnContainer>
-                                <Button margin="30px" height="40px" text="수정" _onClick={() => editPost(post.id, post.userNick)} />
-                                <Button margin="30px" height="40px" text="삭제" _onClick={() => deletePost(post.id, post.userNick)} />
+                                <Button margin="30px" className="editBtn" height="40px" text="수정" _onClick={() => editPost(post.id, post.userNick)} />
+                                <Button margin="30px" className="delBtn" height="40px" text="삭제" _onClick={() => deletePost(post.id, post.userNick)} />
                             </BtnContainer>
                         </Wrapper>
                     );
@@ -76,6 +72,24 @@ const Wrapper = styled.div`
     width: 80%;
     margin: 0 auto;
     text-align: center;
+
+    ${({ theme }) => theme.device.desktop} {
+        & p {
+            font-size: 30px;
+        }
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        & p {
+            font-size: 25px;
+        }
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        & p {
+            font-size: 20px;
+        }
+    }
 `;
 
 const ImageBox = styled.div`
@@ -88,6 +102,21 @@ const ImageBox = styled.div`
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+
+    ${({ theme }) => theme.device.desktop} {
+        width: 400px;
+        height: 400px;
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        width: 300px;
+        height: 300px;
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        width: 200px;
+        height: 200px;
+    }
 `;
 
 const TextContainer = styled.div`
@@ -98,13 +127,68 @@ const TextContainer = styled.div`
     background-color: #fff;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
     overflow-y: scroll;
+
+    ${({ theme }) => theme.device.desktop} {
+        width: 600px;
+        height: 150px;
+        & p {
+            font-size: 25px;
+        }
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        width: 400px;
+        height: 150px;
+        & p {
+            font-size: 20px;
+        }
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        width: 250px;
+        height: 100px;
+        & p {
+            font-size: 15px;
+        }
+    }
 `;
 
 const BtnContainer = styled.div`
     width: 500px;
-    margin: auto;
+    margin: 0 auto;
     display: flex;
     justify-content: space-around;
+    align-items: center;
+
+    ${({ theme }) => theme.device.desktop} {
+        width: 300px;
+        height: 80px;
+
+        & button {
+            margin: 5px;
+            width: 100%;
+        }
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        width: 200px;
+        height: 70px;
+
+        & button {
+            margin: 5px;
+            width: 100%;
+        }
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        width: 200px;
+        height: 60px;
+
+        & button {
+            margin: 5px;
+            width: 100%;
+        }
+    }
 `;
 
 export default PostDetail;

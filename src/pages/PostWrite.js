@@ -42,10 +42,6 @@ const PostWrite = (props) => {
         formData.append("categori", species);
         formData.append("file", imageDir);
 
-        for (let [key, val] of formData) {
-            console.log(key, val);
-        }
-
         dispatch(postActions.addPostDB(formData));
         window.alert("작성 완료!");
         history.push("/");

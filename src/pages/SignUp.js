@@ -126,6 +126,18 @@ const Wrapper = styled.div`
     & .submitBtn {
         display: block;
     }
+
+    ${({ theme }) => theme.device.desktop} {
+        height: 600px;
+    }
+
+    ${({ theme }) => theme.device.tablet} {
+        height: 500px;
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        height: 400px;
+    }
 `;
 
 const ImgBox = styled.div`
@@ -143,6 +155,16 @@ const InputBox = styled.div`
     justify-content: space-between;
     margin-left: 50px;
     text-align: center;
+
+    ${({ theme }) => theme.device.desktop} {
+        & p {
+            margin: 10px;
+        }
+
+        & .submitBtn {
+            margin-top: 10px;
+        }
+    }
 `;
 
 export default SignUp;

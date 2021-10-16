@@ -48,7 +48,7 @@ const Post = (props) => {
                 <PostWrapper>
                     {postList
                         .slice()
-                        .sort((a, b) => a.id - b.id)
+                        .sort((a, b) => b.id - a.id)
                         .map((post, idx) => {
                             chooseCategory(post.categori);
                             if (!is_all && categorize !== category) return;

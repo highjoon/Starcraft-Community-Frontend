@@ -7,14 +7,15 @@ import { Main, PostWrite, Login, SignUp, PostDetail, PostEdit } from "../pages";
 import GlobalStyle from "../elements/GlobalStyle";
 import { Header } from "../components";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { getCookie } from ".";
 
 function App() {
     const dispatch = useDispatch();
     const is_login = useSelector((state) => state.user.is_login);
 
-    // useEffect(() => {
-    //     dispatch(userActions.logInCheckDB());
-    // });
+    useEffect(() => {
+        dispatch(userActions.logInCheckDB());
+    });
 
     return (
         <React.Fragment>
